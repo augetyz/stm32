@@ -46,4 +46,3 @@ h7b0_lvgl_qspi_extend\touch_800x480.o: ../Core/Inc/touch_800x480.h
 h7b0_lvgl_qspi_extend\touch_800x480.o: ../Core/Inc/soft_user.h
 h7b0_lvgl_qspi_extend\touch_800x480.o: ../Core/Inc/main.h
 h7b0_lvgl_qspi_extend\touch_800x480.o: ../Core/Inc/lcd_LTDC.h
-h7b0_lvgl_qspi_extend\touch_800x480.o: ../Core/Inc/lcd_fonts.h

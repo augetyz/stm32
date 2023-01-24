@@ -3,7 +3,7 @@
 
 #include "main.h"
 #include "stm32h7xx_hal.h"
-#include "lcd_fonts.h"
+
 
 // layer0 的显存地址，本例程使用7B0内部的AXI SRAM作为显存，起始地址0x24000000，大小为1M
 // layer0 显存大小等于 = LCD_Width * LCD_Width * BytesPerPixel_0（每个像素所占字节大小）
@@ -64,16 +64,8 @@ uint16_t color_change(uint32_t Color);
 void LCD_DrawPoint(uint16_t x, uint16_t y, uint32_t color);
 void lcd_draw_point(uint16_t x, uint16_t y, uint16_t color);
 void lcd_fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color_biu);
-/* 绘图函数*/
-void LCD_DisplayChar(uint16_t x, uint16_t y, uint8_t c, uint32_t color);
-void LCD_DisplayString(uint16_t x, uint16_t y, char *p, uint32_t color);
-void LCD_SetTextFont(pFONT *fonts);
-void LCD_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t color);
-void LCD_DrawRect(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color);
-void LCD_DrawCircle(uint16_t x, uint16_t y, uint16_t r, uint32_t color);
-void LCD_FillCircle(uint16_t x, uint16_t y, uint16_t r, uint32_t color);
-void draw_circle(int16_t sx, int16_t sy, uint16_t radius, uint32_t color);
-void lcd_draw_image(uint16_t sx,uint16_t sy,uint16_t w,uint16_t h,uint8_t* image);
+
+
 #endif
 /**************************
 浅灰蓝 176	224	230	0XB0E0E6

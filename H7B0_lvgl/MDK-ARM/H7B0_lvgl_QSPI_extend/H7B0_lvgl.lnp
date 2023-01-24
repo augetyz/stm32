@@ -1,6 +1,5 @@
 --cpu Cortex-M7.fp.dp
 "h7b0_lvgl_qspi_extend\startup_stm32h7b0xx.o"
-"h7b0_lvgl_qspi_extend\lcd_fonts.o"
 "h7b0_lvgl_qspi_extend\lcd_ltdc.o"
 "h7b0_lvgl_qspi_extend\soft_user.o"
 "h7b0_lvgl_qspi_extend\touch_800x480.o"

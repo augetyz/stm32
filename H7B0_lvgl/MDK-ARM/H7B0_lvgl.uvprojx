@@ -394,11 +394,6 @@
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
-              <FileName>lcd_fonts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\lcd_fonts.c</FilePath>
-            </File>
-            <File>
               <FileName>lcd_LTDC.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\lcd_LTDC.c</FilePath>

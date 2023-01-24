@@ -46,4 +46,3 @@ h7b0_lvgl_qspi_extend\lcd_ltdc.o: ../Core/Inc/touch_iic.h
 h7b0_lvgl_qspi_extend\lcd_ltdc.o: ../Core/Inc/main.h
 h7b0_lvgl_qspi_extend\lcd_ltdc.o: ../Core/Inc/soft_user.h
 h7b0_lvgl_qspi_extend\lcd_ltdc.o: ../Core/Inc/lcd_LTDC.h
-h7b0_lvgl_qspi_extend\lcd_ltdc.o: ../Core/Inc/lcd_fonts.h

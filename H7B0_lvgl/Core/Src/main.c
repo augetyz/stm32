@@ -55,7 +55,9 @@ TIM_HandleTypeDef htim7;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-
+lv_obj_t * led1;
+lv_obj_t * led2;
+lv_obj_t * led3;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -68,28 +70,68 @@ static void MX_LTDC_Init(void);
 static void MX_DMA2D_Init(void);
 static void MX_TIM7_Init(void);
 /* USER CODE BEGIN PFP */
-extern unsigned char gImage_play[128000];
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void lv_example_led_1(void)
 {
+    
     /*Create a LED and switch it OFF*/
-    lv_obj_t * led1  = lv_led_create(lv_scr_act());
+    led1  = lv_led_create(lv_scr_act());
     lv_obj_align(led1, LV_ALIGN_CENTER, -80, 0);
+    lv_led_set_color(led1, lv_palette_main(LV_PALETTE_GREEN));
     lv_led_off(led1);
 
     /*Copy the previous LED and set a brightness*/
-    lv_obj_t * led2  = lv_led_create(lv_scr_act());
+    led2  = lv_led_create(lv_scr_act());
     lv_obj_align(led2, LV_ALIGN_CENTER, 0, 0);
     lv_led_set_brightness(led2, 150);
     lv_led_set_color(led2, lv_palette_main(LV_PALETTE_RED));
 
     /*Copy the previous LED and switch it ON*/
-    lv_obj_t * led3  = lv_led_create(lv_scr_act());
+    led3  = lv_led_create(lv_scr_act());
     lv_obj_align(led3, LV_ALIGN_CENTER, 80, 0);
     lv_led_on(led3);
+}
+static void event_handler(lv_event_t * e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+
+    if(code == LV_EVENT_CLICKED) {
+        printf("1\n");
+        lv_led_toggle(led1);
+    }
+    else if(code == LV_EVENT_VALUE_CHANGED) {
+        printf("2\n");
+        lv_led_toggle(led2);
+    }
+}
+
+void lv_example_btn_1(void)
+{
+    lv_obj_t * label;
+
+    lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
+    lv_obj_add_event_cb(btn1, event_handler, LV_EVENT_ALL, NULL);
+    lv_obj_align(btn1, LV_ALIGN_CENTER, 60, 160);
+
+    label = lv_label_create(btn1);
+    lv_label_set_text(label, "Button");
+    lv_obj_center(label);
+
+    lv_obj_t * btn2 = lv_btn_create(lv_scr_act());
+    lv_obj_add_event_cb(btn2, event_handler, LV_EVENT_ALL, NULL);
+    lv_obj_align(btn2, LV_ALIGN_CENTER, -60, 160);
+    lv_obj_add_flag(btn2, LV_OBJ_FLAG_CHECKABLE);
+    lv_obj_set_height(btn2, LV_SIZE_CONTENT);
+
+    label = lv_label_create(btn2);
+    lv_label_set_text(label, "Toggle");
+    lv_obj_center(label);
+    
+    
 }
 /* USER CODE END 0 */
 
@@ -149,9 +191,10 @@ int main(void)
     lv_init();			  // lvgl系统初始化
     lv_port_disp_init();  // lvgl显示接口初始化,放在lv_init()的后面
     lv_port_indev_init(); // lvgl输入接口初始化,放在lv_init()的后面
-//    lv_example_led_1();
+    lv_example_led_1();
+    lv_example_btn_1();
 //    lv_example_span_1();
-    lv_demo_keypad_encoder();
+//    lv_demo_keypad_encoder();
 //    lv_example_style_1();
 
 
