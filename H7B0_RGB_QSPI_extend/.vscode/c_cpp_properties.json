@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "E:\\HAL_example\\H7B0_LTDC_DMA_RGB\\Drivers\\STM32H7xx_HAL_Driver\\Inc\\**",
+                "D:\\keil5\\ARM\\ARMCC\\include\\**",
+                "E:\\HAL_example\\H7B0_LTDC_DMA_RGB\\Core\\Inc\\**",
+                "E:\\HAL_example\\H7B0_LTDC_DMA_RGB\\Drivers\\CMSIS\\Include\\**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "USE_HAL_DRIVER",
+                "STM32H7B0xx"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "E:/VS IDE/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}

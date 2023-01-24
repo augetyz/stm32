@@ -1,0 +1,1 @@
+f030_k6t6_ws2812\startup_stm32f030x6.o: startup_stm32f030x6.s

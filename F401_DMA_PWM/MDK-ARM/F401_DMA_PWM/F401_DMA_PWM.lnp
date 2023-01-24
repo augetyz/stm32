@@ -1,0 +1,25 @@
+--cpu=Cortex-M4.fp.sp
+"f401_dma_pwm\startup_stm32f401xe.o"
+"f401_dma_pwm\main.o"
+"f401_dma_pwm\stm32f4xx_it.o"
+"f401_dma_pwm\stm32f4xx_hal_msp.o"
+"f401_dma_pwm\stm32f4xx_hal_tim.o"
+"f401_dma_pwm\stm32f4xx_hal_tim_ex.o"
+"f401_dma_pwm\stm32f4xx_hal_rcc.o"
+"f401_dma_pwm\stm32f4xx_hal_rcc_ex.o"
+"f401_dma_pwm\stm32f4xx_hal_flash.o"
+"f401_dma_pwm\stm32f4xx_hal_flash_ex.o"
+"f401_dma_pwm\stm32f4xx_hal_flash_ramfunc.o"
+"f401_dma_pwm\stm32f4xx_hal_gpio.o"
+"f401_dma_pwm\stm32f4xx_hal_dma_ex.o"
+"f401_dma_pwm\stm32f4xx_hal_dma.o"
+"f401_dma_pwm\stm32f4xx_hal_pwr.o"
+"f401_dma_pwm\stm32f4xx_hal_pwr_ex.o"
+"f401_dma_pwm\stm32f4xx_hal_cortex.o"
+"f401_dma_pwm\stm32f4xx_hal.o"
+"f401_dma_pwm\stm32f4xx_hal_exti.o"
+"f401_dma_pwm\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "F401_DMA_PWM\F401_DMA_PWM.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "F401_DMA_PWM.map" -o F401_DMA_PWM\F401_DMA_PWM.axf

@@ -1,0 +1,13 @@
+h7b0_lvgl_qspi_extend\lv_async.o: ..\lvgl\src\misc\lv_async.c
+h7b0_lvgl_qspi_extend\lv_async.o: ..\lvgl\src\misc\lv_async.h
+h7b0_lvgl_qspi_extend\lv_async.o: ..\lvgl\src\misc\lv_types.h
+h7b0_lvgl_qspi_extend\lv_async.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+h7b0_lvgl_qspi_extend\lv_async.o: ..\lvgl\src\misc\lv_mem.h
+h7b0_lvgl_qspi_extend\lv_async.o: ..\lvgl\src\misc\../lv_conf_internal.h
+h7b0_lvgl_qspi_extend\lv_async.o: ..\lvgl\src\misc\../lv_conf_kconfig.h
+h7b0_lvgl_qspi_extend\lv_async.o: ..\lvgl\lv_conf.h
+h7b0_lvgl_qspi_extend\lv_async.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h7b0_lvgl_qspi_extend\lv_async.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
+h7b0_lvgl_qspi_extend\lv_async.o: ..\lvgl\src\misc\lv_timer.h
+h7b0_lvgl_qspi_extend\lv_async.o: ..\lvgl\src\misc\../hal/lv_hal_tick.h
+h7b0_lvgl_qspi_extend\lv_async.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h

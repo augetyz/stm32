@@ -1,0 +1,1471 @@
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"touch_800x480.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.GT9XX_Reset,"ax",%progbits
+  17              		.align	1
+  18              		.global	GT9XX_Reset
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	GT9XX_Reset:
+  26              	.LFB144:
+  27              		.file 1 "Core/Src/touch_800x480.c"
+   1:Core/Src/touch_800x480.c **** /***
+   2:Core/Src/touch_800x480.c **** >>>>>	文件说明：
+   3:Core/Src/touch_800x480.c **** 	*
+   4:Core/Src/touch_800x480.c **** 	*  1.触摸屏相关的操作函数
+   5:Core/Src/touch_800x480.c **** 	* 	2.使用模拟IIC
+   6:Core/Src/touch_800x480.c **** 	*	3.通信速度默认为100KHz
+   7:Core/Src/touch_800x480.c **** 	*	
+   8:Core/Src/touch_800x480.c **** 	**************************************************************************************************
+   9:Core/Src/touch_800x480.c **** ***/
+  10:Core/Src/touch_800x480.c **** 
+  11:Core/Src/touch_800x480.c **** #include "touch_800x480.h"
+  12:Core/Src/touch_800x480.c **** 
+  13:Core/Src/touch_800x480.c **** volatile TouchStructure touchInfo; 			//	触摸信息结构体，在函数 Touch_Scan() 里被调用，存储触摸数据
+  14:Core/Src/touch_800x480.c **** volatile static uint8_t Modify_Flag = 0;	// 触摸坐标修改标志位
+  15:Core/Src/touch_800x480.c **** 	
+  16:Core/Src/touch_800x480.c **** 
+  17:Core/Src/touch_800x480.c **** /**************************************************************************************************
+  18:Core/Src/touch_800x480.c **** *	函 数 名:	GT9XX_Reset
+  19:Core/Src/touch_800x480.c **** *	入口参数:	无
+  20:Core/Src/touch_800x480.c **** *	返 回 值:	无
+  21:Core/Src/touch_800x480.c **** *	函数功能:	复位GT911
+  22:Core/Src/touch_800x480.c **** *	说    明:	复位GT911，并将芯片的IIC地址配置为0xBA/0xBB
+  23:Core/Src/touch_800x480.c **** ***************************************************************************************************
+  24:Core/Src/touch_800x480.c **** 
+  25:Core/Src/touch_800x480.c **** void GT9XX_Reset(void)
+  26:Core/Src/touch_800x480.c **** {
+  28              		.loc 1 26 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 2
+
+
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  27:Core/Src/touch_800x480.c **** 	Touch_INT_Out();	//	将INT引脚配置为输出
+  37              		.loc 1 27 2 view .LVU1
+  38 0002 FFF7FEFF 		bl	Touch_INT_Out
+  39              	.LVL0:
+  28:Core/Src/touch_800x480.c **** 	
+  29:Core/Src/touch_800x480.c **** 	// 初始化引脚状态
+  30:Core/Src/touch_800x480.c **** 	HAL_GPIO_WritePin(Touch_INT_PORT,Touch_INT_PIN,GPIO_PIN_RESET);  // INT输出低电平
+  40              		.loc 1 30 2 view .LVU2
+  41 0006 134C     		ldr	r4, .L3
+  42 0008 0022     		movs	r2, #0
+  43 000a 1021     		movs	r1, #16
+  44 000c 2046     		mov	r0, r4
+  45 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  46              	.LVL1:
+  31:Core/Src/touch_800x480.c **** 	HAL_GPIO_WritePin(Touch_RST_PORT,Touch_RST_PIN,GPIO_PIN_SET);    // RST输出高	电平
+  47              		.loc 1 31 2 view .LVU3
+  48 0012 0122     		movs	r2, #1
+  49 0014 0821     		movs	r1, #8
+  50 0016 2046     		mov	r0, r4
+  51 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  52              	.LVL2:
+  32:Core/Src/touch_800x480.c **** 	Touch_IIC_Delay(10000);
+  53              		.loc 1 32 2 view .LVU4
+  54 001c 42F21070 		movw	r0, #10000
+  55 0020 FFF7FEFF 		bl	Touch_IIC_Delay
+  56              	.LVL3:
+  33:Core/Src/touch_800x480.c **** 	
+  34:Core/Src/touch_800x480.c **** 	// 开始执行复位
+  35:Core/Src/touch_800x480.c **** 	//	INT引脚保持低电平不变，将器件地址设置为0XBA/0XBB
+  36:Core/Src/touch_800x480.c **** 	HAL_GPIO_WritePin(Touch_RST_PORT,Touch_RST_PIN,GPIO_PIN_RESET); // 拉低复位引脚，此时芯片执行复位
+  57              		.loc 1 36 2 view .LVU5
+  58 0024 0022     		movs	r2, #0
+  59 0026 0821     		movs	r1, #8
+  60 0028 2046     		mov	r0, r4
+  61 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  62              	.LVL4:
+  37:Core/Src/touch_800x480.c **** 	Touch_IIC_Delay(150000);			// 延时
+  63              		.loc 1 37 2 view .LVU6
+  64 002e 0A48     		ldr	r0, .L3+4
+  65 0030 FFF7FEFF 		bl	Touch_IIC_Delay
+  66              	.LVL5:
+  38:Core/Src/touch_800x480.c **** 	HAL_GPIO_WritePin(Touch_RST_PORT,Touch_RST_PIN,GPIO_PIN_SET);			// 拉高复位引脚，复位结束
+  67              		.loc 1 38 2 view .LVU7
+  68 0034 0122     		movs	r2, #1
+  69 0036 0821     		movs	r1, #8
+  70 0038 2046     		mov	r0, r4
+  71 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  72              	.LVL6:
+  39:Core/Src/touch_800x480.c **** 	Touch_IIC_Delay(350000);			// 延时
+  73              		.loc 1 39 2 view .LVU8
+  74 003e 0748     		ldr	r0, .L3+8
+  75 0040 FFF7FEFF 		bl	Touch_IIC_Delay
+  76              	.LVL7:
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 3
+
+
+  40:Core/Src/touch_800x480.c **** 	Touch_INT_In();						// INT引脚转为浮空输入
+  77              		.loc 1 40 2 view .LVU9
+  78 0044 FFF7FEFF 		bl	Touch_INT_In
+  79              	.LVL8:
+  41:Core/Src/touch_800x480.c **** 	Touch_IIC_Delay(20000);				// 延时
+  80              		.loc 1 41 2 view .LVU10
+  81 0048 44F62060 		movw	r0, #20000
+  82 004c FFF7FEFF 		bl	Touch_IIC_Delay
+  83              	.LVL9:
+  42:Core/Src/touch_800x480.c **** 									
+  43:Core/Src/touch_800x480.c **** }
+  84              		.loc 1 43 1 is_stmt 0 view .LVU11
+  85 0050 10BD     		pop	{r4, pc}
+  86              	.L4:
+  87 0052 00BF     		.align	2
+  88              	.L3:
+  89 0054 00100258 		.word	1476530176
+  90 0058 F0490200 		.word	150000
+  91 005c 30570500 		.word	350000
+  92              		.cfi_endproc
+  93              	.LFE144:
+  95              		.section	.text.GT9XX_WriteHandle,"ax",%progbits
+  96              		.align	1
+  97              		.global	GT9XX_WriteHandle
+  98              		.syntax unified
+  99              		.thumb
+ 100              		.thumb_func
+ 101              		.fpu fpv5-d16
+ 103              	GT9XX_WriteHandle:
+ 104              	.LVL10:
+ 105              	.LFB145:
+  44:Core/Src/touch_800x480.c **** 
+  45:Core/Src/touch_800x480.c **** /**************************************************************************************************
+  46:Core/Src/touch_800x480.c **** *	函 数 名:	GT9XX_WriteHandle
+  47:Core/Src/touch_800x480.c **** *	入口参数:	addr - 要操作的寄存器
+  48:Core/Src/touch_800x480.c **** *	返 回 值:	SUCCESS - 操作成功
+  49:Core/Src/touch_800x480.c **** *					ERROR	  - 操作失败
+  50:Core/Src/touch_800x480.c **** *	函数功能:	GT9XX 写操作
+  51:Core/Src/touch_800x480.c **** *	说    明:	对指定的寄存器执行写操作
+  52:Core/Src/touch_800x480.c **** ***************************************************************************************************
+  53:Core/Src/touch_800x480.c **** 
+  54:Core/Src/touch_800x480.c **** uint8_t GT9XX_WriteHandle (uint16_t addr)
+  55:Core/Src/touch_800x480.c **** {
+ 106              		.loc 1 55 1 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110              		.loc 1 55 1 is_stmt 0 view .LVU13
+ 111 0000 10B5     		push	{r4, lr}
+ 112              	.LCFI1:
+ 113              		.cfi_def_cfa_offset 8
+ 114              		.cfi_offset 4, -8
+ 115              		.cfi_offset 14, -4
+ 116 0002 0446     		mov	r4, r0
+  56:Core/Src/touch_800x480.c **** 	uint8_t status;		// 状态标志位
+ 117              		.loc 1 56 2 is_stmt 1 view .LVU14
+  57:Core/Src/touch_800x480.c **** 
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 4
+
+
+  58:Core/Src/touch_800x480.c **** 	Touch_IIC_Start();	// 启动IIC通信
+ 118              		.loc 1 58 2 view .LVU15
+ 119 0004 FFF7FEFF 		bl	Touch_IIC_Start
+ 120              	.LVL11:
+  59:Core/Src/touch_800x480.c **** 	if( Touch_IIC_WriteByte(GT9XX_IIC_WADDR) == ACK_OK ) //写数据指令
+ 121              		.loc 1 59 2 view .LVU16
+ 122              		.loc 1 59 6 is_stmt 0 view .LVU17
+ 123 0008 BA20     		movs	r0, #186
+ 124 000a FFF7FEFF 		bl	Touch_IIC_WriteByte
+ 125              	.LVL12:
+ 126              		.loc 1 59 4 view .LVU18
+ 127 000e 0128     		cmp	r0, #1
+ 128 0010 01D0     		beq	.L8
+ 129              	.L6:
+  60:Core/Src/touch_800x480.c **** 	{
+  61:Core/Src/touch_800x480.c **** 		if( Touch_IIC_WriteByte((uint8_t)(addr >> 8)) == ACK_OK ) //写入16位地址
+  62:Core/Src/touch_800x480.c **** 		{
+  63:Core/Src/touch_800x480.c **** 			if( Touch_IIC_WriteByte((uint8_t)(addr)) != ACK_OK )
+  64:Core/Src/touch_800x480.c **** 			{
+  65:Core/Src/touch_800x480.c **** 				status = ERROR;	// 操作失败
+  66:Core/Src/touch_800x480.c **** 			}			
+  67:Core/Src/touch_800x480.c **** 		}
+  68:Core/Src/touch_800x480.c **** 	}
+  69:Core/Src/touch_800x480.c **** 	status = SUCCESS;	// 操作成功
+ 130              		.loc 1 69 2 is_stmt 1 view .LVU19
+ 131              	.LVL13:
+  70:Core/Src/touch_800x480.c **** 	return status;	
+ 132              		.loc 1 70 2 view .LVU20
+  71:Core/Src/touch_800x480.c **** }
+ 133              		.loc 1 71 1 is_stmt 0 view .LVU21
+ 134 0012 0020     		movs	r0, #0
+ 135 0014 10BD     		pop	{r4, pc}
+ 136              	.LVL14:
+ 137              	.L8:
+  61:Core/Src/touch_800x480.c **** 		{
+ 138              		.loc 1 61 3 is_stmt 1 view .LVU22
+  61:Core/Src/touch_800x480.c **** 		{
+ 139              		.loc 1 61 7 is_stmt 0 view .LVU23
+ 140 0016 200A     		lsrs	r0, r4, #8
+ 141 0018 FFF7FEFF 		bl	Touch_IIC_WriteByte
+ 142              	.LVL15:
+  61:Core/Src/touch_800x480.c **** 		{
+ 143              		.loc 1 61 5 view .LVU24
+ 144 001c 0128     		cmp	r0, #1
+ 145 001e F8D1     		bne	.L6
+  63:Core/Src/touch_800x480.c **** 			{
+ 146              		.loc 1 63 4 is_stmt 1 view .LVU25
+  63:Core/Src/touch_800x480.c **** 			{
+ 147              		.loc 1 63 8 is_stmt 0 view .LVU26
+ 148 0020 E0B2     		uxtb	r0, r4
+ 149 0022 FFF7FEFF 		bl	Touch_IIC_WriteByte
+ 150              	.LVL16:
+ 151 0026 F4E7     		b	.L6
+ 152              		.cfi_endproc
+ 153              	.LFE145:
+ 155              		.section	.text.GT9XX_WriteData,"ax",%progbits
+ 156              		.align	1
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 5
+
+
+ 157              		.global	GT9XX_WriteData
+ 158              		.syntax unified
+ 159              		.thumb
+ 160              		.thumb_func
+ 161              		.fpu fpv5-d16
+ 163              	GT9XX_WriteData:
+ 164              	.LVL17:
+ 165              	.LFB146:
+  72:Core/Src/touch_800x480.c **** 
+  73:Core/Src/touch_800x480.c **** /**************************************************************************************************
+  74:Core/Src/touch_800x480.c **** *	函 数 名:	GT9XX_WriteData
+  75:Core/Src/touch_800x480.c **** *	入口参数:	addr - 要写入的寄存器
+  76:Core/Src/touch_800x480.c **** *					value - 要写入的数据
+  77:Core/Src/touch_800x480.c **** *	返 回 值:	SUCCESS - 操作成功
+  78:Core/Src/touch_800x480.c **** *					ERROR	  - 操作失败
+  79:Core/Src/touch_800x480.c **** *	函数功能:	GT9XX 写一字节数据
+  80:Core/Src/touch_800x480.c **** *	说    明:	对指定的寄存器写入一字节数据
+  81:Core/Src/touch_800x480.c **** ***************************************************************************************************
+  82:Core/Src/touch_800x480.c **** 
+  83:Core/Src/touch_800x480.c **** uint8_t GT9XX_WriteData (uint16_t addr,uint8_t value)
+  84:Core/Src/touch_800x480.c **** {
+ 166              		.loc 1 84 1 is_stmt 1 view -0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170              		.loc 1 84 1 is_stmt 0 view .LVU28
+ 171 0000 38B5     		push	{r3, r4, r5, lr}
+ 172              	.LCFI2:
+ 173              		.cfi_def_cfa_offset 16
+ 174              		.cfi_offset 3, -16
+ 175              		.cfi_offset 4, -12
+ 176              		.cfi_offset 5, -8
+ 177              		.cfi_offset 14, -4
+ 178 0002 0446     		mov	r4, r0
+ 179 0004 0D46     		mov	r5, r1
+  85:Core/Src/touch_800x480.c **** 	uint8_t status;
+ 180              		.loc 1 85 2 is_stmt 1 view .LVU29
+  86:Core/Src/touch_800x480.c **** 	
+  87:Core/Src/touch_800x480.c **** 	Touch_IIC_Start(); //启动IIC通讯
+ 181              		.loc 1 87 2 view .LVU30
+ 182 0006 FFF7FEFF 		bl	Touch_IIC_Start
+ 183              	.LVL18:
+  88:Core/Src/touch_800x480.c **** 
+  89:Core/Src/touch_800x480.c **** 	if( GT9XX_WriteHandle(addr) == SUCCESS)	//写入要操作的寄存器
+ 184              		.loc 1 89 2 view .LVU31
+ 185              		.loc 1 89 6 is_stmt 0 view .LVU32
+ 186 000a 2046     		mov	r0, r4
+ 187 000c FFF7FEFF 		bl	GT9XX_WriteHandle
+ 188              	.LVL19:
+ 189              		.loc 1 89 4 view .LVU33
+ 190 0010 18B1     		cbz	r0, .L12
+ 191              	.L10:
+  90:Core/Src/touch_800x480.c **** 	{
+  91:Core/Src/touch_800x480.c **** 		if (Touch_IIC_WriteByte(value) != ACK_OK) //写数据
+  92:Core/Src/touch_800x480.c **** 		{
+  93:Core/Src/touch_800x480.c **** 			status = ERROR;						
+  94:Core/Src/touch_800x480.c **** 		}
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 6
+
+
+  95:Core/Src/touch_800x480.c **** 	}	
+  96:Core/Src/touch_800x480.c **** 	Touch_IIC_Stop(); // 停止通讯
+ 192              		.loc 1 96 2 is_stmt 1 view .LVU34
+ 193 0012 FFF7FEFF 		bl	Touch_IIC_Stop
+ 194              	.LVL20:
+  97:Core/Src/touch_800x480.c **** 	
+  98:Core/Src/touch_800x480.c **** 	status = SUCCESS;	// 写入成功
+ 195              		.loc 1 98 2 view .LVU35
+  99:Core/Src/touch_800x480.c **** 	return status;
+ 196              		.loc 1 99 2 view .LVU36
+ 100:Core/Src/touch_800x480.c **** }
+ 197              		.loc 1 100 1 is_stmt 0 view .LVU37
+ 198 0016 0020     		movs	r0, #0
+ 199 0018 38BD     		pop	{r3, r4, r5, pc}
+ 200              	.LVL21:
+ 201              	.L12:
+  91:Core/Src/touch_800x480.c **** 		{
+ 202              		.loc 1 91 3 is_stmt 1 view .LVU38
+  91:Core/Src/touch_800x480.c **** 		{
+ 203              		.loc 1 91 7 is_stmt 0 view .LVU39
+ 204 001a 2846     		mov	r0, r5
+ 205 001c FFF7FEFF 		bl	Touch_IIC_WriteByte
+ 206              	.LVL22:
+ 207 0020 F7E7     		b	.L10
+ 208              		.cfi_endproc
+ 209              	.LFE146:
+ 211              		.section	.text.GT9XX_WriteReg,"ax",%progbits
+ 212              		.align	1
+ 213              		.global	GT9XX_WriteReg
+ 214              		.syntax unified
+ 215              		.thumb
+ 216              		.thumb_func
+ 217              		.fpu fpv5-d16
+ 219              	GT9XX_WriteReg:
+ 220              	.LVL23:
+ 221              	.LFB147:
+ 101:Core/Src/touch_800x480.c **** 
+ 102:Core/Src/touch_800x480.c **** /**************************************************************************************************
+ 103:Core/Src/touch_800x480.c **** *	函 数 名:	GT9XX_WriteReg
+ 104:Core/Src/touch_800x480.c **** *	入口参数:	addr - 要写入的寄存器区域首地址
+ 105:Core/Src/touch_800x480.c **** *					cnt  - 数据长度
+ 106:Core/Src/touch_800x480.c **** *					value - 要写入的数据区
+ 107:Core/Src/touch_800x480.c **** *	返 回 值:	SUCCESS - 操作成功
+ 108:Core/Src/touch_800x480.c **** *					ERROR	  - 操作失败
+ 109:Core/Src/touch_800x480.c **** *	函数功能:	GT9XX 写寄存器
+ 110:Core/Src/touch_800x480.c **** *	说    明:	往芯片的寄存器区写入指定长度的数据
+ 111:Core/Src/touch_800x480.c **** ***************************************************************************************************
+ 112:Core/Src/touch_800x480.c **** 
+ 113:Core/Src/touch_800x480.c **** uint8_t GT9XX_WriteReg (uint16_t addr, uint8_t cnt, uint8_t *value)
+ 114:Core/Src/touch_800x480.c **** {
+ 222              		.loc 1 114 1 is_stmt 1 view -0
+ 223              		.cfi_startproc
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226              		.loc 1 114 1 is_stmt 0 view .LVU41
+ 227 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 228              	.LCFI3:
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 7
+
+
+ 229              		.cfi_def_cfa_offset 24
+ 230              		.cfi_offset 3, -24
+ 231              		.cfi_offset 4, -20
+ 232              		.cfi_offset 5, -16
+ 233              		.cfi_offset 6, -12
+ 234              		.cfi_offset 7, -8
+ 235              		.cfi_offset 14, -4
+ 236 0002 0446     		mov	r4, r0
+ 237 0004 0D46     		mov	r5, r1
+ 238 0006 1646     		mov	r6, r2
+ 115:Core/Src/touch_800x480.c **** 	uint8_t status;
+ 239              		.loc 1 115 2 is_stmt 1 view .LVU42
+ 116:Core/Src/touch_800x480.c **** 	uint8_t i;
+ 240              		.loc 1 116 2 view .LVU43
+ 117:Core/Src/touch_800x480.c **** 
+ 118:Core/Src/touch_800x480.c **** 	Touch_IIC_Start();
+ 241              		.loc 1 118 2 view .LVU44
+ 242 0008 FFF7FEFF 		bl	Touch_IIC_Start
+ 243              	.LVL24:
+ 119:Core/Src/touch_800x480.c **** 
+ 120:Core/Src/touch_800x480.c **** 	if( GT9XX_WriteHandle(addr) == SUCCESS) 	// 写入要操作的寄存器
+ 244              		.loc 1 120 2 view .LVU45
+ 245              		.loc 1 120 6 is_stmt 0 view .LVU46
+ 246 000c 2046     		mov	r0, r4
+ 247 000e FFF7FEFF 		bl	GT9XX_WriteHandle
+ 248              	.LVL25:
+ 249              		.loc 1 120 4 view .LVU47
+ 250 0012 68B9     		cbnz	r0, .L21
+ 251 0014 0746     		mov	r7, r0
+ 121:Core/Src/touch_800x480.c **** 	{
+ 122:Core/Src/touch_800x480.c **** 		for(i = 0 ; i < cnt; i++)			 	// 计数
+ 252              		.loc 1 122 9 view .LVU48
+ 253 0016 0446     		mov	r4, r0
+ 254 0018 04E0     		b	.L14
+ 255              	.LVL26:
+ 256              	.L16:
+ 123:Core/Src/touch_800x480.c **** 		{
+ 124:Core/Src/touch_800x480.c **** 			Touch_IIC_WriteByte(value[i]);	// 写入数据
+ 257              		.loc 1 124 4 is_stmt 1 discriminator 3 view .LVU49
+ 258 001a 305D     		ldrb	r0, [r6, r4]	@ zero_extendqisi2
+ 259 001c FFF7FEFF 		bl	Touch_IIC_WriteByte
+ 260              	.LVL27:
+ 122:Core/Src/touch_800x480.c **** 		{
+ 261              		.loc 1 122 24 discriminator 3 view .LVU50
+ 122:Core/Src/touch_800x480.c **** 		{
+ 262              		.loc 1 122 25 is_stmt 0 discriminator 3 view .LVU51
+ 263 0020 0134     		adds	r4, r4, #1
+ 264              	.LVL28:
+ 122:Core/Src/touch_800x480.c **** 		{
+ 265              		.loc 1 122 25 discriminator 3 view .LVU52
+ 266 0022 E4B2     		uxtb	r4, r4
+ 267              	.LVL29:
+ 268              	.L14:
+ 122:Core/Src/touch_800x480.c **** 		{
+ 269              		.loc 1 122 15 is_stmt 1 discriminator 1 view .LVU53
+ 122:Core/Src/touch_800x480.c **** 		{
+ 270              		.loc 1 122 3 is_stmt 0 discriminator 1 view .LVU54
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 8
+
+
+ 271 0024 AC42     		cmp	r4, r5
+ 272 0026 F8D3     		bcc	.L16
+ 125:Core/Src/touch_800x480.c **** 		}					
+ 126:Core/Src/touch_800x480.c **** 		Touch_IIC_Stop();		// 停止IIC通信
+ 273              		.loc 1 126 3 is_stmt 1 view .LVU55
+ 274 0028 FFF7FEFF 		bl	Touch_IIC_Stop
+ 275              	.LVL30:
+ 127:Core/Src/touch_800x480.c **** 		status = SUCCESS;		// 写入成功
+ 276              		.loc 1 127 3 view .LVU56
+ 277              	.L17:
+ 128:Core/Src/touch_800x480.c **** 	}
+ 129:Core/Src/touch_800x480.c **** 	else
+ 130:Core/Src/touch_800x480.c **** 	{
+ 131:Core/Src/touch_800x480.c **** 		Touch_IIC_Stop();		// 停止IIC通信
+ 132:Core/Src/touch_800x480.c **** 		status = ERROR;		// 写入失败
+ 133:Core/Src/touch_800x480.c **** 	}
+ 134:Core/Src/touch_800x480.c **** 	return status;	
+ 278              		.loc 1 134 2 view .LVU57
+ 135:Core/Src/touch_800x480.c **** }
+ 279              		.loc 1 135 1 is_stmt 0 view .LVU58
+ 280 002c 3846     		mov	r0, r7
+ 281 002e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 282              	.LVL31:
+ 283              	.L21:
+ 131:Core/Src/touch_800x480.c **** 		status = ERROR;		// 写入失败
+ 284              		.loc 1 131 3 is_stmt 1 view .LVU59
+ 285 0030 FFF7FEFF 		bl	Touch_IIC_Stop
+ 286              	.LVL32:
+ 132:Core/Src/touch_800x480.c **** 	}
+ 287              		.loc 1 132 3 view .LVU60
+ 132:Core/Src/touch_800x480.c **** 	}
+ 288              		.loc 1 132 10 is_stmt 0 view .LVU61
+ 289 0034 0127     		movs	r7, #1
+ 290 0036 F9E7     		b	.L17
+ 291              		.cfi_endproc
+ 292              	.LFE147:
+ 294              		.section	.text.GT9XX_ReadReg,"ax",%progbits
+ 295              		.align	1
+ 296              		.global	GT9XX_ReadReg
+ 297              		.syntax unified
+ 298              		.thumb
+ 299              		.thumb_func
+ 300              		.fpu fpv5-d16
+ 302              	GT9XX_ReadReg:
+ 303              	.LVL33:
+ 304              	.LFB148:
+ 136:Core/Src/touch_800x480.c **** 
+ 137:Core/Src/touch_800x480.c **** /**************************************************************************************************
+ 138:Core/Src/touch_800x480.c **** *	函 数 名:	GT9XX_ReadReg
+ 139:Core/Src/touch_800x480.c **** *	入口参数:	addr - 要读取的寄存器区域首地址
+ 140:Core/Src/touch_800x480.c **** *					cnt  - 数据长度
+ 141:Core/Src/touch_800x480.c **** *					value - 要读取的数据区
+ 142:Core/Src/touch_800x480.c **** *	返 回 值:	SUCCESS - 操作成功
+ 143:Core/Src/touch_800x480.c **** *					ERROR	  - 操作失败
+ 144:Core/Src/touch_800x480.c **** *	函数功能:	GT9XX 读寄存器
+ 145:Core/Src/touch_800x480.c **** *	说    明:	从芯片的寄存器区读取指定长度的数据
+ 146:Core/Src/touch_800x480.c **** ***************************************************************************************************
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 9
+
+
+ 147:Core/Src/touch_800x480.c **** 
+ 148:Core/Src/touch_800x480.c **** uint8_t GT9XX_ReadReg (uint16_t addr, uint8_t cnt, uint8_t *value)
+ 149:Core/Src/touch_800x480.c **** {
+ 305              		.loc 1 149 1 is_stmt 1 view -0
+ 306              		.cfi_startproc
+ 307              		@ args = 0, pretend = 0, frame = 0
+ 308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 309              		.loc 1 149 1 is_stmt 0 view .LVU63
+ 310 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 311              	.LCFI4:
+ 312              		.cfi_def_cfa_offset 24
+ 313              		.cfi_offset 3, -24
+ 314              		.cfi_offset 4, -20
+ 315              		.cfi_offset 5, -16
+ 316              		.cfi_offset 6, -12
+ 317              		.cfi_offset 7, -8
+ 318              		.cfi_offset 14, -4
+ 319 0002 0446     		mov	r4, r0
+ 320 0004 0D46     		mov	r5, r1
+ 321 0006 1746     		mov	r7, r2
+ 150:Core/Src/touch_800x480.c **** 	uint8_t status;
+ 322              		.loc 1 150 2 is_stmt 1 view .LVU64
+ 151:Core/Src/touch_800x480.c **** 	uint8_t i;
+ 323              		.loc 1 151 2 view .LVU65
+ 152:Core/Src/touch_800x480.c **** 
+ 153:Core/Src/touch_800x480.c **** 	status = ERROR;
+ 324              		.loc 1 153 2 view .LVU66
+ 325              	.LVL34:
+ 154:Core/Src/touch_800x480.c **** 	Touch_IIC_Start();		// 启动IIC通信
+ 326              		.loc 1 154 2 view .LVU67
+ 327 0008 FFF7FEFF 		bl	Touch_IIC_Start
+ 328              	.LVL35:
+ 155:Core/Src/touch_800x480.c **** 
+ 156:Core/Src/touch_800x480.c **** 	if( GT9XX_WriteHandle(addr) == SUCCESS) //写入要操作的寄存器
+ 329              		.loc 1 156 2 view .LVU68
+ 330              		.loc 1 156 6 is_stmt 0 view .LVU69
+ 331 000c 2046     		mov	r0, r4
+ 332 000e FFF7FEFF 		bl	GT9XX_WriteHandle
+ 333              	.LVL36:
+ 334              		.loc 1 156 4 view .LVU70
+ 335 0012 20B1     		cbz	r0, .L31
+ 153:Core/Src/touch_800x480.c **** 	Touch_IIC_Start();		// 启动IIC通信
+ 336              		.loc 1 153 9 view .LVU71
+ 337 0014 0126     		movs	r6, #1
+ 338              	.LVL37:
+ 339              	.L23:
+ 157:Core/Src/touch_800x480.c **** 	{
+ 158:Core/Src/touch_800x480.c **** 		Touch_IIC_Start(); //重新启动IIC通讯
+ 159:Core/Src/touch_800x480.c **** 
+ 160:Core/Src/touch_800x480.c **** 		if (Touch_IIC_WriteByte(GT9XX_IIC_RADDR) == ACK_OK)	// 发送读命令
+ 161:Core/Src/touch_800x480.c **** 		{	
+ 162:Core/Src/touch_800x480.c **** 			for(i = 0 ; i < cnt; i++)	// 计数
+ 163:Core/Src/touch_800x480.c **** 			{
+ 164:Core/Src/touch_800x480.c **** 				if (i == (cnt - 1))
+ 165:Core/Src/touch_800x480.c **** 				{
+ 166:Core/Src/touch_800x480.c **** 					value[i] = Touch_IIC_ReadByte(0);	// 读到最后一个数据时发送 非应答信号
+ 167:Core/Src/touch_800x480.c **** 				}
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 10
+
+
+ 168:Core/Src/touch_800x480.c **** 				else
+ 169:Core/Src/touch_800x480.c **** 				{
+ 170:Core/Src/touch_800x480.c **** 					value[i] = Touch_IIC_ReadByte(1);	// 发送应答信号
+ 171:Core/Src/touch_800x480.c **** 				}
+ 172:Core/Src/touch_800x480.c **** 			}					
+ 173:Core/Src/touch_800x480.c **** 			Touch_IIC_Stop();	// 停止IIC通信
+ 174:Core/Src/touch_800x480.c **** 			status = SUCCESS;
+ 175:Core/Src/touch_800x480.c **** 		}
+ 176:Core/Src/touch_800x480.c **** 	}
+ 177:Core/Src/touch_800x480.c **** 	Touch_IIC_Stop();	// 停止IIC通信
+ 340              		.loc 1 177 2 is_stmt 1 view .LVU72
+ 341 0016 FFF7FEFF 		bl	Touch_IIC_Stop
+ 342              	.LVL38:
+ 178:Core/Src/touch_800x480.c **** 	return (status);	
+ 343              		.loc 1 178 2 view .LVU73
+ 179:Core/Src/touch_800x480.c **** }
+ 344              		.loc 1 179 1 is_stmt 0 view .LVU74
+ 345 001a 3046     		mov	r0, r6
+ 346 001c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 347              	.LVL39:
+ 348              	.L31:
+ 349              		.loc 1 179 1 view .LVU75
+ 350 001e 0646     		mov	r6, r0
+ 158:Core/Src/touch_800x480.c **** 
+ 351              		.loc 1 158 3 is_stmt 1 view .LVU76
+ 352 0020 FFF7FEFF 		bl	Touch_IIC_Start
+ 353              	.LVL40:
+ 160:Core/Src/touch_800x480.c **** 		{	
+ 354              		.loc 1 160 3 view .LVU77
+ 160:Core/Src/touch_800x480.c **** 		{	
+ 355              		.loc 1 160 7 is_stmt 0 view .LVU78
+ 356 0024 BB20     		movs	r0, #187
+ 357 0026 FFF7FEFF 		bl	Touch_IIC_WriteByte
+ 358              	.LVL41:
+ 160:Core/Src/touch_800x480.c **** 		{	
+ 359              		.loc 1 160 6 view .LVU79
+ 360 002a 0128     		cmp	r0, #1
+ 361 002c 11D0     		beq	.L29
+ 153:Core/Src/touch_800x480.c **** 	Touch_IIC_Start();		// 启动IIC通信
+ 362              		.loc 1 153 9 view .LVU80
+ 363 002e 0126     		movs	r6, #1
+ 364 0030 F1E7     		b	.L23
+ 365              	.LVL42:
+ 366              	.L33:
+ 166:Core/Src/touch_800x480.c **** 				}
+ 367              		.loc 1 166 6 is_stmt 1 view .LVU81
+ 166:Core/Src/touch_800x480.c **** 				}
+ 368              		.loc 1 166 17 is_stmt 0 view .LVU82
+ 369 0032 0020     		movs	r0, #0
+ 370 0034 FFF7FEFF 		bl	Touch_IIC_ReadByte
+ 371              	.LVL43:
+ 166:Core/Src/touch_800x480.c **** 				}
+ 372              		.loc 1 166 15 view .LVU83
+ 373 0038 3855     		strb	r0, [r7, r4]
+ 374              	.L26:
+ 162:Core/Src/touch_800x480.c **** 			{
+ 375              		.loc 1 162 25 is_stmt 1 discriminator 2 view .LVU84
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 11
+
+
+ 162:Core/Src/touch_800x480.c **** 			{
+ 376              		.loc 1 162 26 is_stmt 0 discriminator 2 view .LVU85
+ 377 003a 0134     		adds	r4, r4, #1
+ 378              	.LVL44:
+ 162:Core/Src/touch_800x480.c **** 			{
+ 379              		.loc 1 162 26 discriminator 2 view .LVU86
+ 380 003c E4B2     		uxtb	r4, r4
+ 381              	.LVL45:
+ 382              	.L24:
+ 162:Core/Src/touch_800x480.c **** 			{
+ 383              		.loc 1 162 16 is_stmt 1 discriminator 1 view .LVU87
+ 162:Core/Src/touch_800x480.c **** 			{
+ 384              		.loc 1 162 4 is_stmt 0 discriminator 1 view .LVU88
+ 385 003e AC42     		cmp	r4, r5
+ 386 0040 09D2     		bcs	.L32
+ 164:Core/Src/touch_800x480.c **** 				{
+ 387              		.loc 1 164 5 is_stmt 1 view .LVU89
+ 164:Core/Src/touch_800x480.c **** 				{
+ 388              		.loc 1 164 19 is_stmt 0 view .LVU90
+ 389 0042 6B1E     		subs	r3, r5, #1
+ 164:Core/Src/touch_800x480.c **** 				{
+ 390              		.loc 1 164 8 view .LVU91
+ 391 0044 9C42     		cmp	r4, r3
+ 392 0046 F4D0     		beq	.L33
+ 170:Core/Src/touch_800x480.c **** 				}
+ 393              		.loc 1 170 6 is_stmt 1 view .LVU92
+ 170:Core/Src/touch_800x480.c **** 				}
+ 394              		.loc 1 170 17 is_stmt 0 view .LVU93
+ 395 0048 0120     		movs	r0, #1
+ 396 004a FFF7FEFF 		bl	Touch_IIC_ReadByte
+ 397              	.LVL46:
+ 170:Core/Src/touch_800x480.c **** 				}
+ 398              		.loc 1 170 15 view .LVU94
+ 399 004e 3855     		strb	r0, [r7, r4]
+ 400 0050 F3E7     		b	.L26
+ 401              	.LVL47:
+ 402              	.L29:
+ 162:Core/Src/touch_800x480.c **** 			{
+ 403              		.loc 1 162 10 view .LVU95
+ 404 0052 3446     		mov	r4, r6
+ 405 0054 F3E7     		b	.L24
+ 406              	.LVL48:
+ 407              	.L32:
+ 173:Core/Src/touch_800x480.c **** 			status = SUCCESS;
+ 408              		.loc 1 173 4 is_stmt 1 view .LVU96
+ 409 0056 FFF7FEFF 		bl	Touch_IIC_Stop
+ 410              	.LVL49:
+ 174:Core/Src/touch_800x480.c **** 		}
+ 411              		.loc 1 174 4 view .LVU97
+ 174:Core/Src/touch_800x480.c **** 		}
+ 412              		.loc 1 174 4 is_stmt 0 view .LVU98
+ 413 005a DCE7     		b	.L23
+ 414              		.cfi_endproc
+ 415              	.LFE148:
+ 417              		.section	.text.PanelRecognition,"ax",%progbits
+ 418              		.align	1
+ 419              		.global	PanelRecognition
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 12
+
+
+ 420              		.syntax unified
+ 421              		.thumb
+ 422              		.thumb_func
+ 423              		.fpu fpv5-d16
+ 425              	PanelRecognition:
+ 426              	.LFB149:
+ 180:Core/Src/touch_800x480.c **** 
+ 181:Core/Src/touch_800x480.c **** /**************************************************************************************************
+ 182:Core/Src/touch_800x480.c **** *	函 数 名: PanelRecognition
+ 183:Core/Src/touch_800x480.c **** *	入口参数: 无
+ 184:Core/Src/touch_800x480.c **** *	返 回 值: 无    
+ 185:Core/Src/touch_800x480.c **** *	函数功能: 识别屏幕的版本
+ 186:Core/Src/touch_800x480.c **** *	说    明: 在 RGB070M1-800*480 V1.1 之前的硬件版本，触摸屏的分辨率为1024*600，
+ 187:Core/Src/touch_800x480.c **** *				 为了程序上的兼容，这里进行判断处理，旧版本的RST和INT引脚并没有连接到核心板，
+ 188:Core/Src/touch_800x480.c **** *				 因此可以根据这两个引脚的电平状态进行识别，此段代码只对旧版的7寸屏有用，
+ 189:Core/Src/touch_800x480.c **** *				 其它尺寸的屏幕无需理会
+ 190:Core/Src/touch_800x480.c **** ***************************************************************************************************
+ 191:Core/Src/touch_800x480.c **** 
+ 192:Core/Src/touch_800x480.c **** void	PanelRecognition (void)
+ 193:Core/Src/touch_800x480.c **** {
+ 427              		.loc 1 193 1 is_stmt 1 view -0
+ 428              		.cfi_startproc
+ 429              		@ args = 0, pretend = 0, frame = 32
+ 430              		@ frame_needed = 0, uses_anonymous_args = 0
+ 431 0000 30B5     		push	{r4, r5, lr}
+ 432              	.LCFI5:
+ 433              		.cfi_def_cfa_offset 12
+ 434              		.cfi_offset 4, -12
+ 435              		.cfi_offset 5, -8
+ 436              		.cfi_offset 14, -4
+ 437 0002 89B0     		sub	sp, sp, #36
+ 438              	.LCFI6:
+ 439              		.cfi_def_cfa_offset 48
+ 194:Core/Src/touch_800x480.c **** 	GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 440              		.loc 1 194 2 view .LVU100
+ 441              		.loc 1 194 19 is_stmt 0 view .LVU101
+ 442 0004 0023     		movs	r3, #0
+ 443 0006 0393     		str	r3, [sp, #12]
+ 444 0008 0493     		str	r3, [sp, #16]
+ 445 000a 0593     		str	r3, [sp, #20]
+ 446 000c 0693     		str	r3, [sp, #24]
+ 447 000e 0793     		str	r3, [sp, #28]
+ 195:Core/Src/touch_800x480.c **** 	
+ 196:Core/Src/touch_800x480.c **** 	Touch_INT_CLK_ENABLE;	//初始化IO口时钟
+ 448              		.loc 1 196 2 is_stmt 1 view .LVU102
+ 449              	.LBB2:
+ 450              		.loc 1 196 2 view .LVU103
+ 451              		.loc 1 196 2 view .LVU104
+ 452 0010 1E4B     		ldr	r3, .L38
+ 453 0012 D3F84021 		ldr	r2, [r3, #320]
+ 454 0016 42F01002 		orr	r2, r2, #16
+ 455 001a C3F84021 		str	r2, [r3, #320]
+ 456              		.loc 1 196 2 view .LVU105
+ 457 001e D3F84021 		ldr	r2, [r3, #320]
+ 458 0022 02F01002 		and	r2, r2, #16
+ 459 0026 0192     		str	r2, [sp, #4]
+ 460              		.loc 1 196 2 view .LVU106
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 13
+
+
+ 461 0028 019A     		ldr	r2, [sp, #4]
+ 462              	.LBE2:
+ 463              		.loc 1 196 2 view .LVU107
+ 197:Core/Src/touch_800x480.c **** 	Touch_RST_CLK_ENABLE;		
+ 464              		.loc 1 197 2 view .LVU108
+ 465              	.LBB3:
+ 466              		.loc 1 197 2 view .LVU109
+ 467              		.loc 1 197 2 view .LVU110
+ 468 002a D3F84021 		ldr	r2, [r3, #320]
+ 469 002e 42F01002 		orr	r2, r2, #16
+ 470 0032 C3F84021 		str	r2, [r3, #320]
+ 471              		.loc 1 197 2 view .LVU111
+ 472 0036 D3F84031 		ldr	r3, [r3, #320]
+ 473 003a 03F01003 		and	r3, r3, #16
+ 474 003e 0293     		str	r3, [sp, #8]
+ 475              		.loc 1 197 2 view .LVU112
+ 476 0040 029B     		ldr	r3, [sp, #8]
+ 477              	.LBE3:
+ 478              		.loc 1 197 2 view .LVU113
+ 198:Core/Src/touch_800x480.c **** 
+ 199:Core/Src/touch_800x480.c **** 		
+ 200:Core/Src/touch_800x480.c **** 	GPIO_InitStruct.Mode  = GPIO_MODE_INPUT;      		//	输入模式
+ 479              		.loc 1 200 2 view .LVU114
+ 201:Core/Src/touch_800x480.c **** 	GPIO_InitStruct.Pull  = GPIO_PULLDOWN;		 			//	下拉输入
+ 480              		.loc 1 201 2 view .LVU115
+ 481              		.loc 1 201 24 is_stmt 0 view .LVU116
+ 482 0042 0223     		movs	r3, #2
+ 483 0044 0593     		str	r3, [sp, #20]
+ 202:Core/Src/touch_800x480.c **** 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;    	// 速度等级
+ 484              		.loc 1 202 2 is_stmt 1 view .LVU117
+ 203:Core/Src/touch_800x480.c **** 	GPIO_InitStruct.Pin   = Touch_INT_PIN ;  				// 初始化 INT 引脚
+ 485              		.loc 1 203 2 view .LVU118
+ 486              		.loc 1 203 24 is_stmt 0 view .LVU119
+ 487 0046 1023     		movs	r3, #16
+ 488 0048 0393     		str	r3, [sp, #12]
+ 204:Core/Src/touch_800x480.c **** 	
+ 205:Core/Src/touch_800x480.c **** 	HAL_GPIO_Init(Touch_INT_PORT, &GPIO_InitStruct);			
+ 489              		.loc 1 205 2 is_stmt 1 view .LVU120
+ 490 004a 114C     		ldr	r4, .L38+4
+ 491 004c 03A9     		add	r1, sp, #12
+ 492 004e 2046     		mov	r0, r4
+ 493 0050 FFF7FEFF 		bl	HAL_GPIO_Init
+ 494              	.LVL50:
+ 206:Core/Src/touch_800x480.c **** 
+ 207:Core/Src/touch_800x480.c **** 	GPIO_InitStruct.Pin  = Touch_RST_PIN; 					//	RST
+ 495              		.loc 1 207 2 view .LVU121
+ 496              		.loc 1 207 23 is_stmt 0 view .LVU122
+ 497 0054 0825     		movs	r5, #8
+ 498 0056 0395     		str	r5, [sp, #12]
+ 208:Core/Src/touch_800x480.c **** 	HAL_GPIO_Init(Touch_RST_PORT, &GPIO_InitStruct);					   
+ 499              		.loc 1 208 2 is_stmt 1 view .LVU123
+ 500 0058 03A9     		add	r1, sp, #12
+ 501 005a 2046     		mov	r0, r4
+ 502 005c FFF7FEFF 		bl	HAL_GPIO_Init
+ 503              	.LVL51:
+ 209:Core/Src/touch_800x480.c **** 
+ 210:Core/Src/touch_800x480.c **** 	Touch_IIC_Delay(4000);		// 延时
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 14
+
+
+ 504              		.loc 1 210 2 view .LVU124
+ 505 0060 4FF47A60 		mov	r0, #4000
+ 506 0064 FFF7FEFF 		bl	Touch_IIC_Delay
+ 507              	.LVL52:
+ 211:Core/Src/touch_800x480.c **** 	
+ 212:Core/Src/touch_800x480.c **** 	//	旧版本的RST和INT引脚并没有连接到核心板，因此可以根据这两个引脚的电平状态进行识别，
+ 213:Core/Src/touch_800x480.c **** 	//	新版本的硬件这两个脚做了上拉处理
+ 214:Core/Src/touch_800x480.c **** 	if( (HAL_GPIO_ReadPin(Touch_RST_PORT,Touch_RST_PIN) != 1) && (HAL_GPIO_ReadPin(Touch_INT_PORT,Touc
+ 508              		.loc 1 214 2 view .LVU125
+ 509              		.loc 1 214 7 is_stmt 0 view .LVU126
+ 510 0068 2946     		mov	r1, r5
+ 511 006a 2046     		mov	r0, r4
+ 512 006c FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 513              	.LVL53:
+ 514              		.loc 1 214 4 view .LVU127
+ 515 0070 0128     		cmp	r0, #1
+ 516 0072 01D1     		bne	.L37
+ 517              	.L34:
+ 215:Core/Src/touch_800x480.c **** 	{
+ 216:Core/Src/touch_800x480.c **** 		// 在 V1.1 之前的硬件版本，触摸屏的分辨率为1024*600，为了程序上的兼容，这里进行判断处理
+ 217:Core/Src/touch_800x480.c **** 		//	该变量标志主要用于判断是否需要软件修改采集到的触摸坐标
+ 218:Core/Src/touch_800x480.c **** 		// 此段代码只对旧版的7寸屏有用，其它尺寸的屏幕无需理会
+ 219:Core/Src/touch_800x480.c **** 		Modify_Flag	= 1;			
+ 220:Core/Src/touch_800x480.c **** 	}
+ 221:Core/Src/touch_800x480.c **** }
+ 518              		.loc 1 221 1 view .LVU128
+ 519 0074 09B0     		add	sp, sp, #36
+ 520              	.LCFI7:
+ 521              		.cfi_remember_state
+ 522              		.cfi_def_cfa_offset 12
+ 523              		@ sp needed
+ 524 0076 30BD     		pop	{r4, r5, pc}
+ 525              	.L37:
+ 526              	.LCFI8:
+ 527              		.cfi_restore_state
+ 214:Core/Src/touch_800x480.c **** 	{
+ 528              		.loc 1 214 64 discriminator 1 view .LVU129
+ 529 0078 1021     		movs	r1, #16
+ 530 007a 2046     		mov	r0, r4
+ 531 007c FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 532              	.LVL54:
+ 214:Core/Src/touch_800x480.c **** 	{
+ 533              		.loc 1 214 60 discriminator 1 view .LVU130
+ 534 0080 0128     		cmp	r0, #1
+ 535 0082 F7D0     		beq	.L34
+ 219:Core/Src/touch_800x480.c **** 	}
+ 536              		.loc 1 219 3 is_stmt 1 view .LVU131
+ 219:Core/Src/touch_800x480.c **** 	}
+ 537              		.loc 1 219 15 is_stmt 0 view .LVU132
+ 538 0084 034B     		ldr	r3, .L38+8
+ 539 0086 0122     		movs	r2, #1
+ 540 0088 1A70     		strb	r2, [r3]
+ 541              		.loc 1 221 1 view .LVU133
+ 542 008a F3E7     		b	.L34
+ 543              	.L39:
+ 544              		.align	2
+ 545              	.L38:
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 15
+
+
+ 546 008c 00440258 		.word	1476543488
+ 547 0090 00100258 		.word	1476530176
+ 548 0094 00000000 		.word	.LANCHOR0
+ 549              		.cfi_endproc
+ 550              	.LFE149:
+ 552              		.section	.rodata.Touch_Init.str1.4,"aMS",%progbits,1
+ 553              		.align	2
+ 554              	.LC0:
+ 555 0000 546F7563 		.ascii	"Touch ID: GT%.4s \015\012\000"
+ 555      68204944 
+ 555      3A204754 
+ 555      252E3473 
+ 555      200D0A00 
+ 556              		.align	2
+ 557              	.LC1:
+ 558 0014 B9CCBCFE 		.ascii	"\271\314\274\376\260\346\261\276\243\272 0X%.4x\015"
+ 558      B0E6B1BE 
+ 558      A3BA2030 
+ 558      58252E34 
+ 558      780D
+ 559 0026 0A00     		.ascii	"\012\000"
+ 560              		.align	2
+ 561              	.LC2:
+ 562 0028 B4A5C3FE 		.ascii	"\264\245\303\376\267\326\261\346\302\312\243\272%d "
+ 562      B7D6B1E6 
+ 562      C2CAA3BA 
+ 562      256420
+ 563 0037 2A202564 		.ascii	"* %d\015\012\000"
+ 563      0D0A00
+ 564 003e 0000     		.align	2
+ 565              	.LC3:
+ 566 0040 B4A5C3FE 		.ascii	"\264\245\303\376\262\316\312\375\305\344\326\303\260"
+ 566      B2CECAFD 
+ 566      C5E4D6C3 
+ 566      B0
+ 567 004d E6B1BEA3 		.ascii	"\346\261\276\243\272 0X%.2x \015\012\000"
+ 567      BA203058 
+ 567      252E3278 
+ 567      200D0A00 
+ 568 005d 000000   		.align	2
+ 569              	.LC4:
+ 570 0060 546F7563 		.ascii	"Touch Error\015\000"
+ 570      68204572 
+ 570      726F720D 
+ 570      00
+ 571              		.section	.text.Touch_Init,"ax",%progbits
+ 572              		.align	1
+ 573              		.global	Touch_Init
+ 574              		.syntax unified
+ 575              		.thumb
+ 576              		.thumb_func
+ 577              		.fpu fpv5-d16
+ 579              	Touch_Init:
+ 580              	.LFB150:
+ 222:Core/Src/touch_800x480.c **** 
+ 223:Core/Src/touch_800x480.c **** /**************************************************************************************************
+ 224:Core/Src/touch_800x480.c **** *	函 数 名: Touch_Init
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 16
+
+
+ 225:Core/Src/touch_800x480.c **** *	入口参数: 无
+ 226:Core/Src/touch_800x480.c **** *	返 回 值: SUCCESS  - 初始化成功
+ 227:Core/Src/touch_800x480.c **** *            ERROR 	 - 错误，未检测到触摸屏	
+ 228:Core/Src/touch_800x480.c **** *	函数功能: 触摸IC初始化，并读取相应信息发送到串口
+ 229:Core/Src/touch_800x480.c **** *	说    明: 初始化触摸面板
+ 230:Core/Src/touch_800x480.c **** ***************************************************************************************************
+ 231:Core/Src/touch_800x480.c **** 
+ 232:Core/Src/touch_800x480.c **** uint8_t Touch_Init(void)
+ 233:Core/Src/touch_800x480.c **** {
+ 581              		.loc 1 233 1 is_stmt 1 view -0
+ 582              		.cfi_startproc
+ 583              		@ args = 0, pretend = 0, frame = 16
+ 584              		@ frame_needed = 0, uses_anonymous_args = 0
+ 585 0000 00B5     		push	{lr}
+ 586              	.LCFI9:
+ 587              		.cfi_def_cfa_offset 4
+ 588              		.cfi_offset 14, -4
+ 589 0002 85B0     		sub	sp, sp, #20
+ 590              	.LCFI10:
+ 591              		.cfi_def_cfa_offset 24
+ 234:Core/Src/touch_800x480.c **** 	uint8_t GT9XX_Info[11];	// 触摸屏IC信息
+ 592              		.loc 1 234 2 view .LVU135
+ 235:Core/Src/touch_800x480.c **** 	uint8_t cfgVersion = 0;	// 触摸配置版本
+ 593              		.loc 1 235 2 view .LVU136
+ 594              		.loc 1 235 10 is_stmt 0 view .LVU137
+ 595 0004 0023     		movs	r3, #0
+ 596 0006 8DF80330 		strb	r3, [sp, #3]
+ 236:Core/Src/touch_800x480.c **** 
+ 237:Core/Src/touch_800x480.c **** 	
+ 238:Core/Src/touch_800x480.c **** 	// 识别屏幕的版本，在 RGB070M1-800*480 V1.1以及之后的硬件版本，无需理会此段代码	
+ 239:Core/Src/touch_800x480.c **** 	// 此段代码只对旧版的7寸屏有用，其它尺寸的屏幕无需理会
+ 240:Core/Src/touch_800x480.c **** 	PanelRecognition();			
+ 597              		.loc 1 240 2 is_stmt 1 view .LVU138
+ 598 000a FFF7FEFF 		bl	PanelRecognition
+ 599              	.LVL55:
+ 241:Core/Src/touch_800x480.c **** 	
+ 242:Core/Src/touch_800x480.c **** 	Touch_IIC_GPIO_Config(); 	// 初始化IIC引脚
+ 600              		.loc 1 242 2 view .LVU139
+ 601 000e FFF7FEFF 		bl	Touch_IIC_GPIO_Config
+ 602              	.LVL56:
+ 243:Core/Src/touch_800x480.c **** 	GT9XX_Reset();					// 复位IC
+ 603              		.loc 1 243 2 view .LVU140
+ 604 0012 FFF7FEFF 		bl	GT9XX_Reset
+ 605              	.LVL57:
+ 244:Core/Src/touch_800x480.c **** 		
+ 245:Core/Src/touch_800x480.c **** 	GT9XX_ReadReg (GT9XX_ID_ADDR,11,GT9XX_Info);		// 读触摸屏IC信息
+ 606              		.loc 1 245 2 view .LVU141
+ 607 0016 01AA     		add	r2, sp, #4
+ 608 0018 0B21     		movs	r1, #11
+ 609 001a 48F24010 		movw	r0, #33088
+ 610 001e FFF7FEFF 		bl	GT9XX_ReadReg
+ 611              	.LVL58:
+ 246:Core/Src/touch_800x480.c **** 	GT9XX_ReadReg (GT9XX_CFG_ADDR,1,&cfgVersion);	// 读触摸配置版本
+ 612              		.loc 1 246 2 view .LVU142
+ 613 0022 0DF10302 		add	r2, sp, #3
+ 614 0026 0121     		movs	r1, #1
+ 615 0028 48F24700 		movw	r0, #32839
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 17
+
+
+ 616 002c FFF7FEFF 		bl	GT9XX_ReadReg
+ 617              	.LVL59:
+ 247:Core/Src/touch_800x480.c **** 	
+ 248:Core/Src/touch_800x480.c **** 	if( GT9XX_Info[0] == '9' )	//判断第一个字符是否为 9
+ 618              		.loc 1 248 2 view .LVU143
+ 619              		.loc 1 248 16 is_stmt 0 view .LVU144
+ 620 0030 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 621              		.loc 1 248 4 view .LVU145
+ 622 0034 392B     		cmp	r3, #57
+ 623 0036 06D0     		beq	.L46
+ 249:Core/Src/touch_800x480.c **** 	{
+ 250:Core/Src/touch_800x480.c **** 		printf("Touch ID: GT%.4s \r\n",GT9XX_Info);	//打印触摸芯片的ID
+ 251:Core/Src/touch_800x480.c **** 		printf("固件版本： 0X%.4x\r\n",(GT9XX_Info[5]<<8) + GT9XX_Info[4]);	// 芯片固件版本
+ 252:Core/Src/touch_800x480.c **** 		printf("触摸分辨率：%d * %d\r\n",(GT9XX_Info[7]<<8) + GT9XX_Info[6],(GT9XX_Info[9]<<8) +GT9XX_Inf
+ 253:Core/Src/touch_800x480.c **** 		printf("触摸参数配置版本： 0X%.2x \r\n",cfgVersion);	// 触摸配置版本	
+ 254:Core/Src/touch_800x480.c **** 
+ 255:Core/Src/touch_800x480.c **** /*---------版本识别，RGB070M1-800*480 V1.1以及之后的硬件版本或者其它尺寸的屏幕，无需理会此段代码---
+ 256:Core/Src/touch_800x480.c **** 		
+ 257:Core/Src/touch_800x480.c **** 		if( ( (GT9XX_Info[7]<<8) + GT9XX_Info[6] ) == 1024 )		// 判断触摸屏的X轴分辨率是否为1024
+ 258:Core/Src/touch_800x480.c **** 		{
+ 259:Core/Src/touch_800x480.c **** 			// 在 RGB070M1-800*480 V1.1 之前的硬件版本，触摸屏的分辨率为1024*600，为了程序上的兼容，这里进行
+ 260:Core/Src/touch_800x480.c **** 			//	该变量标志主要用于判断是否需要软件修改采集到的触摸坐标
+ 261:Core/Src/touch_800x480.c **** 			Modify_Flag	= 1;	
+ 262:Core/Src/touch_800x480.c **** 		}
+ 263:Core/Src/touch_800x480.c **** 		else if( ( (GT9XX_Info[7]<<8) + GT9XX_Info[6] ) == 800 )	// 触摸屏的X轴分辨率为800
+ 264:Core/Src/touch_800x480.c **** 		{
+ 265:Core/Src/touch_800x480.c **** 			Modify_Flag	= 0;	// 置0标志位，无需做处理
+ 266:Core/Src/touch_800x480.c **** 		}
+ 267:Core/Src/touch_800x480.c **** 		
+ 268:Core/Src/touch_800x480.c **** /*-------------------------------------------------------------------------------------------------
+ 269:Core/Src/touch_800x480.c **** 		return SUCCESS;
+ 270:Core/Src/touch_800x480.c **** 	}
+ 271:Core/Src/touch_800x480.c **** 	else
+ 272:Core/Src/touch_800x480.c **** 	{
+ 273:Core/Src/touch_800x480.c **** 		printf("Touch Error\r\n");	//错误，未检测到触摸屏
+ 624              		.loc 1 273 3 is_stmt 1 view .LVU146
+ 625 0038 1E48     		ldr	r0, .L49
+ 626 003a FFF7FEFF 		bl	puts
+ 627              	.LVL60:
+ 274:Core/Src/touch_800x480.c **** 		return ERROR;
+ 628              		.loc 1 274 3 view .LVU147
+ 629              		.loc 1 274 10 is_stmt 0 view .LVU148
+ 630 003e 0120     		movs	r0, #1
+ 631              	.L44:
+ 275:Core/Src/touch_800x480.c **** 	}
+ 276:Core/Src/touch_800x480.c **** 
+ 277:Core/Src/touch_800x480.c **** }
+ 632              		.loc 1 277 1 view .LVU149
+ 633 0040 05B0     		add	sp, sp, #20
+ 634              	.LCFI11:
+ 635              		.cfi_remember_state
+ 636              		.cfi_def_cfa_offset 4
+ 637              		@ sp needed
+ 638 0042 5DF804FB 		ldr	pc, [sp], #4
+ 639              	.L46:
+ 640              	.LCFI12:
+ 641              		.cfi_restore_state
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 18
+
+
+ 250:Core/Src/touch_800x480.c **** 		printf("固件版本： 0X%.4x\r\n",(GT9XX_Info[5]<<8) + GT9XX_Info[4]);	// 芯片固件版本
+ 642              		.loc 1 250 3 is_stmt 1 view .LVU150
+ 643 0046 01A9     		add	r1, sp, #4
+ 644 0048 1B48     		ldr	r0, .L49+4
+ 645 004a FFF7FEFF 		bl	printf
+ 646              	.LVL61:
+ 251:Core/Src/touch_800x480.c **** 		printf("触摸分辨率：%d * %d\r\n",(GT9XX_Info[7]<<8) + GT9XX_Info[6],(GT9XX_Info[9]<<8) +GT9XX_Inf
+ 647              		.loc 1 251 3 view .LVU151
+ 251:Core/Src/touch_800x480.c **** 		printf("触摸分辨率：%d * %d\r\n",(GT9XX_Info[7]<<8) + GT9XX_Info[6],(GT9XX_Info[9]<<8) +GT9XX_Inf
+ 648              		.loc 1 251 45 is_stmt 0 view .LVU152
+ 649 004e 9DF80910 		ldrb	r1, [sp, #9]	@ zero_extendqisi2
+ 251:Core/Src/touch_800x480.c **** 		printf("触摸分辨率：%d * %d\r\n",(GT9XX_Info[7]<<8) + GT9XX_Info[6],(GT9XX_Info[9]<<8) +GT9XX_Inf
+ 650              		.loc 1 251 65 view .LVU153
+ 651 0052 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
+ 251:Core/Src/touch_800x480.c **** 		printf("触摸分辨率：%d * %d\r\n",(GT9XX_Info[7]<<8) + GT9XX_Info[6],(GT9XX_Info[9]<<8) +GT9XX_Inf
+ 652              		.loc 1 251 3 view .LVU154
+ 653 0056 03EB0121 		add	r1, r3, r1, lsl #8
+ 654 005a 1848     		ldr	r0, .L49+8
+ 655 005c FFF7FEFF 		bl	printf
+ 656              	.LVL62:
+ 252:Core/Src/touch_800x480.c **** 		printf("触摸参数配置版本： 0X%.2x \r\n",cfgVersion);	// 触摸配置版本	
+ 657              		.loc 1 252 3 is_stmt 1 view .LVU155
+ 252:Core/Src/touch_800x480.c **** 		printf("触摸参数配置版本： 0X%.2x \r\n",cfgVersion);	// 触摸配置版本	
+ 658              		.loc 1 252 47 is_stmt 0 view .LVU156
+ 659 0060 9DF80B10 		ldrb	r1, [sp, #11]	@ zero_extendqisi2
+ 252:Core/Src/touch_800x480.c **** 		printf("触摸参数配置版本： 0X%.2x \r\n",cfgVersion);	// 触摸配置版本	
+ 660              		.loc 1 252 67 view .LVU157
+ 661 0064 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
+ 252:Core/Src/touch_800x480.c **** 		printf("触摸参数配置版本： 0X%.2x \r\n",cfgVersion);	// 触摸配置版本	
+ 662              		.loc 1 252 82 view .LVU158
+ 663 0068 9DF80D00 		ldrb	r0, [sp, #13]	@ zero_extendqisi2
+ 252:Core/Src/touch_800x480.c **** 		printf("触摸参数配置版本： 0X%.2x \r\n",cfgVersion);	// 触摸配置版本	
+ 664              		.loc 1 252 101 view .LVU159
+ 665 006c 9DF80C20 		ldrb	r2, [sp, #12]	@ zero_extendqisi2
+ 252:Core/Src/touch_800x480.c **** 		printf("触摸参数配置版本： 0X%.2x \r\n",cfgVersion);	// 触摸配置版本	
+ 666              		.loc 1 252 3 view .LVU160
+ 667 0070 02EB0022 		add	r2, r2, r0, lsl #8
+ 668 0074 03EB0121 		add	r1, r3, r1, lsl #8
+ 669 0078 1148     		ldr	r0, .L49+12
+ 670 007a FFF7FEFF 		bl	printf
+ 671              	.LVL63:
+ 253:Core/Src/touch_800x480.c **** 
+ 672              		.loc 1 253 3 is_stmt 1 view .LVU161
+ 673 007e 9DF80310 		ldrb	r1, [sp, #3]	@ zero_extendqisi2
+ 674 0082 1048     		ldr	r0, .L49+16
+ 675 0084 FFF7FEFF 		bl	printf
+ 676              	.LVL64:
+ 257:Core/Src/touch_800x480.c **** 		{
+ 677              		.loc 1 257 3 view .LVU162
+ 257:Core/Src/touch_800x480.c **** 		{
+ 678              		.loc 1 257 20 is_stmt 0 view .LVU163
+ 679 0088 9DF80B20 		ldrb	r2, [sp, #11]	@ zero_extendqisi2
+ 257:Core/Src/touch_800x480.c **** 		{
+ 680              		.loc 1 257 40 view .LVU164
+ 681 008c 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
+ 257:Core/Src/touch_800x480.c **** 		{
+ 682              		.loc 1 257 28 view .LVU165
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 19
+
+
+ 683 0090 03EB0223 		add	r3, r3, r2, lsl #8
+ 257:Core/Src/touch_800x480.c **** 		{
+ 684              		.loc 1 257 5 view .LVU166
+ 685 0094 B3F5806F 		cmp	r3, #1024
+ 686 0098 04D0     		beq	.L47
+ 263:Core/Src/touch_800x480.c **** 		{
+ 687              		.loc 1 263 8 is_stmt 1 view .LVU167
+ 263:Core/Src/touch_800x480.c **** 		{
+ 688              		.loc 1 263 10 is_stmt 0 view .LVU168
+ 689 009a B3F5487F 		cmp	r3, #800
+ 690 009e 05D0     		beq	.L48
+ 691              	.L43:
+ 269:Core/Src/touch_800x480.c **** 	}
+ 692              		.loc 1 269 3 is_stmt 1 view .LVU169
+ 269:Core/Src/touch_800x480.c **** 	}
+ 693              		.loc 1 269 10 is_stmt 0 view .LVU170
+ 694 00a0 0020     		movs	r0, #0
+ 695 00a2 CDE7     		b	.L44
+ 696              	.L47:
+ 261:Core/Src/touch_800x480.c **** 		}
+ 697              		.loc 1 261 4 is_stmt 1 view .LVU171
+ 261:Core/Src/touch_800x480.c **** 		}
+ 698              		.loc 1 261 16 is_stmt 0 view .LVU172
+ 699 00a4 084B     		ldr	r3, .L49+20
+ 700 00a6 0122     		movs	r2, #1
+ 701 00a8 1A70     		strb	r2, [r3]
+ 702 00aa F9E7     		b	.L43
+ 703              	.L48:
+ 265:Core/Src/touch_800x480.c **** 		}
+ 704              		.loc 1 265 4 is_stmt 1 view .LVU173
+ 265:Core/Src/touch_800x480.c **** 		}
+ 705              		.loc 1 265 16 is_stmt 0 view .LVU174
+ 706 00ac 064B     		ldr	r3, .L49+20
+ 707 00ae 0022     		movs	r2, #0
+ 708 00b0 1A70     		strb	r2, [r3]
+ 709 00b2 F5E7     		b	.L43
+ 710              	.L50:
+ 711              		.align	2
+ 712              	.L49:
+ 713 00b4 60000000 		.word	.LC4
+ 714 00b8 00000000 		.word	.LC0
+ 715 00bc 14000000 		.word	.LC1
+ 716 00c0 28000000 		.word	.LC2
+ 717 00c4 40000000 		.word	.LC3
+ 718 00c8 00000000 		.word	.LANCHOR0
+ 719              		.cfi_endproc
+ 720              	.LFE150:
+ 722              		.section	.text.Touch_Scan,"ax",%progbits
+ 723              		.align	1
+ 724              		.global	Touch_Scan
+ 725              		.syntax unified
+ 726              		.thumb
+ 727              		.thumb_func
+ 728              		.fpu fpv5-d16
+ 730              	Touch_Scan:
+ 731              	.LFB151:
+ 278:Core/Src/touch_800x480.c **** 
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 20
+
+
+ 279:Core/Src/touch_800x480.c **** /**************************************************************************************************
+ 280:Core/Src/touch_800x480.c **** *	函 数 名: Touch_Scan
+ 281:Core/Src/touch_800x480.c **** *	入口参数: 无
+ 282:Core/Src/touch_800x480.c **** *	返 回 值: 无
+ 283:Core/Src/touch_800x480.c **** *	函数功能: 触摸扫描
+ 284:Core/Src/touch_800x480.c **** *	说    明: 在程序里周期性的调用该函数，用以检测触摸操作，触摸信息存储在 touchInfo 结构体
+ 285:Core/Src/touch_800x480.c **** ***************************************************************************************************
+ 286:Core/Src/touch_800x480.c **** 
+ 287:Core/Src/touch_800x480.c **** void Touch_Scan(void)
+ 288:Core/Src/touch_800x480.c **** {
+ 732              		.loc 1 288 1 is_stmt 1 view -0
+ 733              		.cfi_startproc
+ 734              		@ args = 0, pretend = 0, frame = 48
+ 735              		@ frame_needed = 0, uses_anonymous_args = 0
+ 736 0000 00B5     		push	{lr}
+ 737              	.LCFI13:
+ 738              		.cfi_def_cfa_offset 4
+ 739              		.cfi_offset 14, -4
+ 740 0002 8DB0     		sub	sp, sp, #52
+ 741              	.LCFI14:
+ 742              		.cfi_def_cfa_offset 56
+ 289:Core/Src/touch_800x480.c ****  	uint8_t  touchData[2 + 8 * TOUCH_MAX ]; 		// 用于存储触摸数据
+ 743              		.loc 1 289 3 view .LVU176
+ 290:Core/Src/touch_800x480.c **** 	uint8_t  i = 0;	
+ 744              		.loc 1 290 2 view .LVU177
+ 745              	.LVL65:
+ 291:Core/Src/touch_800x480.c **** 	
+ 292:Core/Src/touch_800x480.c **** 	GT9XX_ReadReg (GT9XX_READ_ADDR,2 + 8 * TOUCH_MAX ,touchData);	// 读数据
+ 746              		.loc 1 292 2 view .LVU178
+ 747 0004 01AA     		add	r2, sp, #4
+ 748 0006 2A21     		movs	r1, #42
+ 749 0008 48F24E10 		movw	r0, #33102
+ 750 000c FFF7FEFF 		bl	GT9XX_ReadReg
+ 751              	.LVL66:
+ 293:Core/Src/touch_800x480.c **** 	GT9XX_WriteData (GT9XX_READ_ADDR,0);									//	清除触摸芯片的寄存器标志位
+ 752              		.loc 1 293 2 view .LVU179
+ 753 0010 0021     		movs	r1, #0
+ 754 0012 48F24E10 		movw	r0, #33102
+ 755 0016 FFF7FEFF 		bl	GT9XX_WriteData
+ 756              	.LVL67:
+ 294:Core/Src/touch_800x480.c **** 	touchInfo.num = touchData[0] & 0x0f;									// 取当前的触摸点数
+ 757              		.loc 1 294 2 view .LVU180
+ 758              		.loc 1 294 27 is_stmt 0 view .LVU181
+ 759 001a 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 760              		.loc 1 294 31 view .LVU182
+ 761 001e 03F00F03 		and	r3, r3, #15
+ 762              		.loc 1 294 16 view .LVU183
+ 763 0022 394A     		ldr	r2, .L60+16
+ 764 0024 5370     		strb	r3, [r2, #1]
+ 295:Core/Src/touch_800x480.c **** 	
+ 296:Core/Src/touch_800x480.c **** 	if ( (touchInfo.num >= 1) && (touchInfo.num <=5) ) 	//	当触摸数在 1-5 之间时
+ 765              		.loc 1 296 2 is_stmt 1 view .LVU184
+ 766              		.loc 1 296 17 is_stmt 0 view .LVU185
+ 767 0026 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 768              		.loc 1 296 5 view .LVU186
+ 769 0028 1BB1     		cbz	r3, .L52
+ 770              		.loc 1 296 41 discriminator 1 view .LVU187
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 21
+
+
+ 771 002a 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 772 002c DBB2     		uxtb	r3, r3
+ 773              		.loc 1 296 28 discriminator 1 view .LVU188
+ 774 002e 052B     		cmp	r3, #5
+ 775 0030 59D9     		bls	.L57
+ 776              	.L52:
+ 297:Core/Src/touch_800x480.c **** 	{
+ 298:Core/Src/touch_800x480.c **** 		for(i=0;i<touchInfo.num;i++)		// 取相应的触摸坐标
+ 299:Core/Src/touch_800x480.c **** 		{
+ 300:Core/Src/touch_800x480.c **** 			touchInfo.y[i] = (touchData[5+8*i]<<8) | touchData[4+8*i];	// 获取Y坐标
+ 301:Core/Src/touch_800x480.c **** 			touchInfo.x[i] = (touchData[3+8*i]<<8) | touchData[2+8*i];	//	获取X坐标	
+ 302:Core/Src/touch_800x480.c **** 
+ 303:Core/Src/touch_800x480.c **** /*---------版本识别，RGB070M1-800*480 V1.1以及之后的硬件版本或者其它尺寸的屏幕，无需理会此段代码---
+ 304:Core/Src/touch_800x480.c **** 	
+ 305:Core/Src/touch_800x480.c **** 			// 在 V1.1 之前的硬件版本，触摸屏的分辨率为1024*600，为了程序上的兼容，这里进行判断处理
+ 306:Core/Src/touch_800x480.c **** 			//	该变量标志主要用于判断是否需要软件修改采集到的触摸坐标
+ 307:Core/Src/touch_800x480.c **** 			if( Modify_Flag == 1)
+ 308:Core/Src/touch_800x480.c **** 			{
+ 309:Core/Src/touch_800x480.c **** 				touchInfo.y[i] *= 0.8;		// 将1024*600分辨率的触摸坐标换算成800*480的分辨率
+ 310:Core/Src/touch_800x480.c **** 				touchInfo.x[i] *= 0.78;		// 将1024*600分辨率的触摸坐标换算成800*480的分辨率
+ 311:Core/Src/touch_800x480.c **** 			}		
+ 312:Core/Src/touch_800x480.c **** /*-------------------------------------------------------------------------------------------------
+ 313:Core/Src/touch_800x480.c **** 			
+ 314:Core/Src/touch_800x480.c **** 		}
+ 315:Core/Src/touch_800x480.c **** 		touchInfo.flag = 1;	// 触摸标志位置1，代表有触摸动作发生
+ 316:Core/Src/touch_800x480.c **** 	}
+ 317:Core/Src/touch_800x480.c **** 	else                       
+ 318:Core/Src/touch_800x480.c **** 	{
+ 319:Core/Src/touch_800x480.c **** 		touchInfo.flag = 0;	// 触摸标志位置0，无触摸动作
+ 777              		.loc 1 319 3 is_stmt 1 view .LVU189
+ 778              		.loc 1 319 18 is_stmt 0 view .LVU190
+ 779 0032 354B     		ldr	r3, .L60+16
+ 780 0034 0022     		movs	r2, #0
+ 781 0036 1A70     		strb	r2, [r3]
+ 782              	.LVL68:
+ 783              	.L51:
+ 320:Core/Src/touch_800x480.c **** 	}
+ 321:Core/Src/touch_800x480.c **** }
+ 784              		.loc 1 321 1 view .LVU191
+ 785 0038 0DB0     		add	sp, sp, #52
+ 786              	.LCFI15:
+ 787              		.cfi_remember_state
+ 788              		.cfi_def_cfa_offset 4
+ 789              		@ sp needed
+ 790 003a 5DF804FB 		ldr	pc, [sp], #4
+ 791              	.LVL69:
+ 792              	.L54:
+ 793              	.LCFI16:
+ 794              		.cfi_restore_state
+ 298:Core/Src/touch_800x480.c **** 		{
+ 795              		.loc 1 298 27 is_stmt 1 discriminator 2 view .LVU192
+ 298:Core/Src/touch_800x480.c **** 		{
+ 796              		.loc 1 298 28 is_stmt 0 discriminator 2 view .LVU193
+ 797 003e 0132     		adds	r2, r2, #1
+ 798              	.LVL70:
+ 298:Core/Src/touch_800x480.c **** 		{
+ 799              		.loc 1 298 28 discriminator 2 view .LVU194
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 22
+
+
+ 800 0040 D2B2     		uxtb	r2, r2
+ 801              	.LVL71:
+ 802              	.L53:
+ 298:Core/Src/touch_800x480.c **** 		{
+ 803              		.loc 1 298 11 is_stmt 1 discriminator 1 view .LVU195
+ 298:Core/Src/touch_800x480.c **** 		{
+ 804              		.loc 1 298 22 is_stmt 0 discriminator 1 view .LVU196
+ 805 0042 314B     		ldr	r3, .L60+16
+ 806 0044 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 807 0046 DBB2     		uxtb	r3, r3
+ 298:Core/Src/touch_800x480.c **** 		{
+ 808              		.loc 1 298 3 discriminator 1 view .LVU197
+ 809 0048 9342     		cmp	r3, r2
+ 810 004a 4ED9     		bls	.L59
+ 300:Core/Src/touch_800x480.c **** 			touchInfo.x[i] = (touchData[3+8*i]<<8) | touchData[2+8*i];	//	获取X坐标	
+ 811              		.loc 1 300 4 is_stmt 1 view .LVU198
+ 300:Core/Src/touch_800x480.c **** 			touchInfo.x[i] = (touchData[3+8*i]<<8) | touchData[2+8*i];	//	获取X坐标	
+ 812              		.loc 1 300 35 is_stmt 0 view .LVU199
+ 813 004c D300     		lsls	r3, r2, #3
+ 300:Core/Src/touch_800x480.c **** 			touchInfo.x[i] = (touchData[3+8*i]<<8) | touchData[2+8*i];	//	获取X坐标	
+ 814              		.loc 1 300 31 view .LVU200
+ 815 004e 03F13501 		add	r1, r3, #53
+ 816 0052 6944     		add	r1, sp, r1
+ 817 0054 11F82C0C 		ldrb	r0, [r1, #-44]	@ zero_extendqisi2
+ 300:Core/Src/touch_800x480.c **** 			touchInfo.x[i] = (touchData[3+8*i]<<8) | touchData[2+8*i];	//	获取X坐标	
+ 818              		.loc 1 300 54 view .LVU201
+ 819 0058 03F13401 		add	r1, r3, #52
+ 820 005c 6944     		add	r1, sp, r1
+ 821 005e 11F82CCC 		ldrb	ip, [r1, #-44]	@ zero_extendqisi2
+ 300:Core/Src/touch_800x480.c **** 			touchInfo.x[i] = (touchData[3+8*i]<<8) | touchData[2+8*i];	//	获取X坐标	
+ 822              		.loc 1 300 43 view .LVU202
+ 823 0062 4CEA002C 		orr	ip, ip, r0, lsl #8
+ 300:Core/Src/touch_800x480.c **** 			touchInfo.x[i] = (touchData[3+8*i]<<8) | touchData[2+8*i];	//	获取X坐标	
+ 824              		.loc 1 300 19 view .LVU203
+ 825 0066 2849     		ldr	r1, .L60+16
+ 826 0068 101D     		adds	r0, r2, #4
+ 827 006a 01EB4000 		add	r0, r1, r0, lsl #1
+ 828 006e A0F804C0 		strh	ip, [r0, #4]	@ movhi
+ 301:Core/Src/touch_800x480.c **** 
+ 829              		.loc 1 301 4 is_stmt 1 view .LVU204
+ 301:Core/Src/touch_800x480.c **** 
+ 830              		.loc 1 301 31 is_stmt 0 view .LVU205
+ 831 0072 03F13300 		add	r0, r3, #51
+ 832 0076 6844     		add	r0, sp, r0
+ 833 0078 10F82C0C 		ldrb	r0, [r0, #-44]	@ zero_extendqisi2
+ 301:Core/Src/touch_800x480.c **** 
+ 834              		.loc 1 301 54 view .LVU206
+ 835 007c 3233     		adds	r3, r3, #50
+ 836 007e 6B44     		add	r3, sp, r3
+ 837 0080 13F82C3C 		ldrb	r3, [r3, #-44]	@ zero_extendqisi2
+ 301:Core/Src/touch_800x480.c **** 
+ 838              		.loc 1 301 43 view .LVU207
+ 839 0084 43EA0023 		orr	r3, r3, r0, lsl #8
+ 301:Core/Src/touch_800x480.c **** 
+ 840              		.loc 1 301 19 view .LVU208
+ 841 0088 01EB4201 		add	r1, r1, r2, lsl #1
+ 842 008c 4B80     		strh	r3, [r1, #2]	@ movhi
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 23
+
+
+ 307:Core/Src/touch_800x480.c **** 			{
+ 843              		.loc 1 307 4 is_stmt 1 view .LVU209
+ 307:Core/Src/touch_800x480.c **** 			{
+ 844              		.loc 1 307 20 is_stmt 0 view .LVU210
+ 845 008e 1F4B     		ldr	r3, .L60+20
+ 846 0090 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 847 0092 DBB2     		uxtb	r3, r3
+ 307:Core/Src/touch_800x480.c **** 			{
+ 848              		.loc 1 307 6 view .LVU211
+ 849 0094 012B     		cmp	r3, #1
+ 850 0096 D2D1     		bne	.L54
+ 309:Core/Src/touch_800x480.c **** 				touchInfo.x[i] *= 0.78;		// 将1024*600分辨率的触摸坐标换算成800*480的分辨率
+ 851              		.loc 1 309 5 is_stmt 1 view .LVU212
+ 309:Core/Src/touch_800x480.c **** 				touchInfo.x[i] *= 0.78;		// 将1024*600分辨率的触摸坐标换算成800*480的分辨率
+ 852              		.loc 1 309 20 is_stmt 0 view .LVU213
+ 853 0098 1B49     		ldr	r1, .L60+16
+ 854 009a 101D     		adds	r0, r2, #4
+ 855 009c 01EB4000 		add	r0, r1, r0, lsl #1
+ 856 00a0 8388     		ldrh	r3, [r0, #4]
+ 857 00a2 9BB2     		uxth	r3, r3
+ 858 00a4 07EE103A 		vmov	s14, r3	@ int
+ 859 00a8 B8EEC77B 		vcvt.f64.s32	d7, s14
+ 860 00ac 9FED126B 		vldr.64	d6, .L60
+ 861 00b0 27EE067B 		vmul.f64	d7, d7, d6
+ 862 00b4 BCEEC77B 		vcvt.u32.f64	s14, d7
+ 863 00b8 17EE103A 		vmov	r3, s14	@ int
+ 864 00bc 9BB2     		uxth	r3, r3
+ 865 00be 8380     		strh	r3, [r0, #4]	@ movhi
+ 310:Core/Src/touch_800x480.c **** 			}		
+ 866              		.loc 1 310 5 is_stmt 1 view .LVU214
+ 310:Core/Src/touch_800x480.c **** 			}		
+ 867              		.loc 1 310 20 is_stmt 0 view .LVU215
+ 868 00c0 01EB4201 		add	r1, r1, r2, lsl #1
+ 869 00c4 4B88     		ldrh	r3, [r1, #2]
+ 870 00c6 9BB2     		uxth	r3, r3
+ 871 00c8 07EE103A 		vmov	s14, r3	@ int
+ 872 00cc B8EEC77B 		vcvt.f64.s32	d7, s14
+ 873 00d0 9FED0B6B 		vldr.64	d6, .L60+8
+ 874 00d4 27EE067B 		vmul.f64	d7, d7, d6
+ 875 00d8 BCEEC77B 		vcvt.u32.f64	s14, d7
+ 876 00dc 17EE103A 		vmov	r3, s14	@ int
+ 877 00e0 9BB2     		uxth	r3, r3
+ 878 00e2 4B80     		strh	r3, [r1, #2]	@ movhi
+ 879 00e4 ABE7     		b	.L54
+ 880              	.LVL72:
+ 881              	.L57:
+ 298:Core/Src/touch_800x480.c **** 		{
+ 882              		.loc 1 298 8 view .LVU216
+ 883 00e6 0022     		movs	r2, #0
+ 884 00e8 ABE7     		b	.L53
+ 885              	.LVL73:
+ 886              	.L59:
+ 315:Core/Src/touch_800x480.c **** 	}
+ 887              		.loc 1 315 3 is_stmt 1 view .LVU217
+ 315:Core/Src/touch_800x480.c **** 	}
+ 888              		.loc 1 315 18 is_stmt 0 view .LVU218
+ 889 00ea 074B     		ldr	r3, .L60+16
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 24
+
+
+ 890 00ec 0122     		movs	r2, #1
+ 891              	.LVL74:
+ 315:Core/Src/touch_800x480.c **** 	}
+ 892              		.loc 1 315 18 view .LVU219
+ 893 00ee 1A70     		strb	r2, [r3]
+ 894 00f0 A2E7     		b	.L51
+ 895              	.L61:
+ 896 00f2 00BFAFF3 		.align	3
+ 896      0080
+ 897              	.L60:
+ 898 00f8 9A999999 		.word	-1717986918
+ 899 00fc 9999E93F 		.word	1072273817
+ 900 0100 F6285C8F 		.word	-1889785610
+ 901 0104 C2F5E83F 		.word	1072231874
+ 902 0108 00000000 		.word	.LANCHOR1
+ 903 010c 00000000 		.word	.LANCHOR0
+ 904              		.cfi_endproc
+ 905              	.LFE151:
+ 907              		.global	touchInfo
+ 908              		.section	.bss.Modify_Flag,"aw",%nobits
+ 909              		.set	.LANCHOR0,. + 0
+ 912              	Modify_Flag:
+ 913 0000 00       		.space	1
+ 914              		.section	.bss.touchInfo,"aw",%nobits
+ 915              		.align	2
+ 916              		.set	.LANCHOR1,. + 0
+ 919              	touchInfo:
+ 920 0000 00000000 		.space	22
+ 920      00000000 
+ 920      00000000 
+ 920      00000000 
+ 920      00000000 
+ 921              		.text
+ 922              	.Letext0:
+ 923              		.file 2 "d:\\10 2021.07\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 924              		.file 3 "d:\\10 2021.07\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 925              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7b0xx.h"
+ 926              		.file 5 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
+ 927              		.file 6 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h"
+ 928              		.file 7 "Core/Inc/touch_800x480.h"
+ 929              		.file 8 "Core/Inc/touch_iic.h"
+ 930              		.file 9 "d:\\10 2021.07\\arm-none-eabi\\include\\stdio.h"
+ 931              		.file 10 "<built-in>"
+ARM GAS  C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 touch_800x480.c
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:17     .text.GT9XX_Reset:00000000 $t
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:25     .text.GT9XX_Reset:00000000 GT9XX_Reset
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:89     .text.GT9XX_Reset:00000054 $d
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:96     .text.GT9XX_WriteHandle:00000000 $t
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:103    .text.GT9XX_WriteHandle:00000000 GT9XX_WriteHandle
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:156    .text.GT9XX_WriteData:00000000 $t
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:163    .text.GT9XX_WriteData:00000000 GT9XX_WriteData
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:212    .text.GT9XX_WriteReg:00000000 $t
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:219    .text.GT9XX_WriteReg:00000000 GT9XX_WriteReg
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:295    .text.GT9XX_ReadReg:00000000 $t
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:302    .text.GT9XX_ReadReg:00000000 GT9XX_ReadReg
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:418    .text.PanelRecognition:00000000 $t
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:425    .text.PanelRecognition:00000000 PanelRecognition
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:546    .text.PanelRecognition:0000008c $d
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:553    .rodata.Touch_Init.str1.4:00000000 $d
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:572    .text.Touch_Init:00000000 $t
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:579    .text.Touch_Init:00000000 Touch_Init
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:713    .text.Touch_Init:000000b4 $d
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:723    .text.Touch_Scan:00000000 $t
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:730    .text.Touch_Scan:00000000 Touch_Scan
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:898    .text.Touch_Scan:000000f8 $d
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:919    .bss.touchInfo:00000000 touchInfo
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:912    .bss.Modify_Flag:00000000 Modify_Flag
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:913    .bss.Modify_Flag:00000000 $d
+C:\Users\20614\AppData\Local\Temp\cc1Y2kDb.s:915    .bss.touchInfo:00000000 $d
+
+UNDEFINED SYMBOLS
+Touch_INT_Out
+HAL_GPIO_WritePin
+Touch_IIC_Delay
+Touch_INT_In
+Touch_IIC_Start
+Touch_IIC_WriteByte
+Touch_IIC_Stop
+Touch_IIC_ReadByte
+HAL_GPIO_Init
+HAL_GPIO_ReadPin
+Touch_IIC_GPIO_Config
+puts
+printf

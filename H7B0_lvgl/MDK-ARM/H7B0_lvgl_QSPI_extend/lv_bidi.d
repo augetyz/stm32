@@ -1,0 +1,17 @@
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\lv_bidi.c
+h7b0_lvgl_qspi_extend\lv_bidi.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\lv_bidi.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\../lv_conf_internal.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\../lv_conf_kconfig.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\lv_conf.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\lv_txt.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\lv_area.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\../font/lv_font.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\../font/lv_symbol_def.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\lv_printf.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\lv_types.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: ..\lvgl\src\misc\../misc/lv_mem.h
+h7b0_lvgl_qspi_extend\lv_bidi.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h

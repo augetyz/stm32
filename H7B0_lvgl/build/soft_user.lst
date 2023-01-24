@@ -1,0 +1,335 @@
+ARM GAS  C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"soft_user.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.delay,"ax",%progbits
+  17              		.align	1
+  18              		.global	delay
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	delay:
+  26              	.LVL0:
+  27              	.LFB144:
+  28              		.file 1 "Core/Src/soft_user.c"
+   1:Core/Src/soft_user.c **** #include "soft_user.h"
+   2:Core/Src/soft_user.c **** 
+   3:Core/Src/soft_user.c **** extern UART_HandleTypeDef huart1;
+   4:Core/Src/soft_user.c **** 
+   5:Core/Src/soft_user.c **** void delay(uint32_t time)
+   6:Core/Src/soft_user.c **** {
+  29              		.loc 1 6 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+   7:Core/Src/soft_user.c ****      uint32_t i, m;
+  34              		.loc 1 7 6 view .LVU1
+   8:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+  35              		.loc 1 8 6 view .LVU2
+  36              		.loc 1 8 13 is_stmt 0 view .LVU3
+  37 0000 0021     		movs	r1, #0
+  38              		.loc 1 8 6 view .LVU4
+  39 0002 04E0     		b	.L2
+  40              	.LVL1:
+  41              	.L3:
+   9:Core/Src/soft_user.c ****      {
+  10:Core/Src/soft_user.c ****           for (m = 0; m < 140000; m++)
+  11:Core/Src/soft_user.c ****                ;
+  42              		.loc 1 11 16 is_stmt 1 discriminator 3 view .LVU5
+  10:Core/Src/soft_user.c ****                ;
+  43              		.loc 1 10 35 discriminator 3 view .LVU6
+  10:Core/Src/soft_user.c ****                ;
+  44              		.loc 1 10 36 is_stmt 0 discriminator 3 view .LVU7
+  45 0004 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s 			page 2
+
+
+  46              	.LVL2:
+  47              	.L4:
+  10:Core/Src/soft_user.c ****                ;
+  48              		.loc 1 10 23 is_stmt 1 discriminator 1 view .LVU8
+  10:Core/Src/soft_user.c ****                ;
+  49              		.loc 1 10 11 is_stmt 0 discriminator 1 view .LVU9
+  50 0006 044A     		ldr	r2, .L7
+  51 0008 9342     		cmp	r3, r2
+  52 000a FBD9     		bls	.L3
+   8:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+  53              		.loc 1 8 28 is_stmt 1 discriminator 2 view .LVU10
+   8:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+  54              		.loc 1 8 29 is_stmt 0 discriminator 2 view .LVU11
+  55 000c 0131     		adds	r1, r1, #1
+  56              	.LVL3:
+  57              	.L2:
+   8:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+  58              		.loc 1 8 18 is_stmt 1 discriminator 1 view .LVU12
+   8:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+  59              		.loc 1 8 6 is_stmt 0 discriminator 1 view .LVU13
+  60 000e 8142     		cmp	r1, r0
+  61 0010 01D2     		bcs	.L6
+  10:Core/Src/soft_user.c ****                ;
+  62              		.loc 1 10 18 view .LVU14
+  63 0012 0023     		movs	r3, #0
+  64 0014 F7E7     		b	.L4
+  65              	.L6:
+  12:Core/Src/soft_user.c ****      }
+  13:Core/Src/soft_user.c **** }
+  66              		.loc 1 13 1 view .LVU15
+  67 0016 7047     		bx	lr
+  68              	.L8:
+  69              		.align	2
+  70              	.L7:
+  71 0018 DF220200 		.word	139999
+  72              		.cfi_endproc
+  73              	.LFE144:
+  75              		.section	.text.delay_us,"ax",%progbits
+  76              		.align	1
+  77              		.global	delay_us
+  78              		.syntax unified
+  79              		.thumb
+  80              		.thumb_func
+  81              		.fpu fpv5-d16
+  83              	delay_us:
+  84              	.LVL4:
+  85              	.LFB145:
+  14:Core/Src/soft_user.c **** void delay_us(uint32_t time)
+  15:Core/Src/soft_user.c **** {
+  86              		.loc 1 15 1 is_stmt 1 view -0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91              		.loc 1 15 1 is_stmt 0 view .LVU17
+  92 0000 0146     		mov	r1, r0
+  16:Core/Src/soft_user.c ****      uint32_t i, m;
+ARM GAS  C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s 			page 3
+
+
+  93              		.loc 1 16 6 is_stmt 1 view .LVU18
+  17:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+  94              		.loc 1 17 6 view .LVU19
+  95              	.LVL5:
+  96              		.loc 1 17 13 is_stmt 0 view .LVU20
+  97 0002 0022     		movs	r2, #0
+  98              		.loc 1 17 6 view .LVU21
+  99 0004 03E0     		b	.L10
+ 100              	.LVL6:
+ 101              	.L11:
+  18:Core/Src/soft_user.c ****      {
+  19:Core/Src/soft_user.c ****           for (m = 0; m < 140; m++)
+  20:Core/Src/soft_user.c ****                ;
+ 102              		.loc 1 20 16 is_stmt 1 discriminator 3 view .LVU22
+  19:Core/Src/soft_user.c ****                ;
+ 103              		.loc 1 19 32 discriminator 3 view .LVU23
+  19:Core/Src/soft_user.c ****                ;
+ 104              		.loc 1 19 33 is_stmt 0 discriminator 3 view .LVU24
+ 105 0006 0133     		adds	r3, r3, #1
+ 106              	.LVL7:
+ 107              	.L12:
+  19:Core/Src/soft_user.c ****                ;
+ 108              		.loc 1 19 23 is_stmt 1 discriminator 1 view .LVU25
+  19:Core/Src/soft_user.c ****                ;
+ 109              		.loc 1 19 11 is_stmt 0 discriminator 1 view .LVU26
+ 110 0008 8B2B     		cmp	r3, #139
+ 111 000a FCD9     		bls	.L11
+  17:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+ 112              		.loc 1 17 28 is_stmt 1 discriminator 2 view .LVU27
+  17:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+ 113              		.loc 1 17 29 is_stmt 0 discriminator 2 view .LVU28
+ 114 000c 0132     		adds	r2, r2, #1
+ 115              	.LVL8:
+ 116              	.L10:
+  17:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+ 117              		.loc 1 17 18 is_stmt 1 discriminator 1 view .LVU29
+  17:Core/Src/soft_user.c ****      for (i = 0; i < time; i++)
+ 118              		.loc 1 17 6 is_stmt 0 discriminator 1 view .LVU30
+ 119 000e 8A42     		cmp	r2, r1
+ 120 0010 01D2     		bcs	.L14
+  19:Core/Src/soft_user.c ****                ;
+ 121              		.loc 1 19 18 view .LVU31
+ 122 0012 0023     		movs	r3, #0
+ 123 0014 F8E7     		b	.L12
+ 124              	.L14:
+  21:Core/Src/soft_user.c ****      }
+  22:Core/Src/soft_user.c **** }
+ 125              		.loc 1 22 1 view .LVU32
+ 126 0016 7047     		bx	lr
+ 127              		.cfi_endproc
+ 128              	.LFE145:
+ 130              		.section	.text.fputc,"ax",%progbits
+ 131              		.align	1
+ 132              		.global	fputc
+ 133              		.syntax unified
+ 134              		.thumb
+ 135              		.thumb_func
+ARM GAS  C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s 			page 4
+
+
+ 136              		.fpu fpv5-d16
+ 138              	fputc:
+ 139              	.LVL9:
+ 140              	.LFB146:
+  23:Core/Src/soft_user.c **** int fputc(int ch, FILE *f)
+  24:Core/Src/soft_user.c **** {
+ 141              		.loc 1 24 1 is_stmt 1 view -0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 8
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145              		.loc 1 24 1 is_stmt 0 view .LVU34
+ 146 0000 00B5     		push	{lr}
+ 147              	.LCFI0:
+ 148              		.cfi_def_cfa_offset 4
+ 149              		.cfi_offset 14, -4
+ 150 0002 83B0     		sub	sp, sp, #12
+ 151              	.LCFI1:
+ 152              		.cfi_def_cfa_offset 16
+ 153 0004 0190     		str	r0, [sp, #4]
+  25:Core/Src/soft_user.c ****      HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 100); // 发送单字节数据
+ 154              		.loc 1 25 6 is_stmt 1 view .LVU35
+ 155 0006 6423     		movs	r3, #100
+ 156 0008 0122     		movs	r2, #1
+ 157 000a 01A9     		add	r1, sp, #4
+ 158              	.LVL10:
+ 159              		.loc 1 25 6 is_stmt 0 view .LVU36
+ 160 000c 0348     		ldr	r0, .L17
+ 161              	.LVL11:
+ 162              		.loc 1 25 6 view .LVU37
+ 163 000e FFF7FEFF 		bl	HAL_UART_Transmit
+ 164              	.LVL12:
+  26:Core/Src/soft_user.c ****      return (ch);
+ 165              		.loc 1 26 6 is_stmt 1 view .LVU38
+  27:Core/Src/soft_user.c **** }
+ 166              		.loc 1 27 1 is_stmt 0 view .LVU39
+ 167 0012 0198     		ldr	r0, [sp, #4]
+ 168 0014 03B0     		add	sp, sp, #12
+ 169              	.LCFI2:
+ 170              		.cfi_def_cfa_offset 4
+ 171              		@ sp needed
+ 172 0016 5DF804FB 		ldr	pc, [sp], #4
+ 173              	.L18:
+ 174 001a 00BF     		.align	2
+ 175              	.L17:
+ 176 001c 00000000 		.word	huart1
+ 177              		.cfi_endproc
+ 178              	.LFE146:
+ 180              		.section	.text.Usart_SendString,"ax",%progbits
+ 181              		.align	1
+ 182              		.global	Usart_SendString
+ 183              		.syntax unified
+ 184              		.thumb
+ 185              		.thumb_func
+ 186              		.fpu fpv5-d16
+ 188              	Usart_SendString:
+ 189              	.LVL13:
+ 190              	.LFB147:
+ARM GAS  C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s 			page 5
+
+
+  28:Core/Src/soft_user.c **** void Usart_SendString(uint8_t *str)
+  29:Core/Src/soft_user.c **** {
+ 191              		.loc 1 29 1 is_stmt 1 view -0
+ 192              		.cfi_startproc
+ 193              		@ args = 0, pretend = 0, frame = 0
+ 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ 195              		.loc 1 29 1 is_stmt 0 view .LVU41
+ 196 0000 38B5     		push	{r3, r4, r5, lr}
+ 197              	.LCFI3:
+ 198              		.cfi_def_cfa_offset 16
+ 199              		.cfi_offset 3, -16
+ 200              		.cfi_offset 4, -12
+ 201              		.cfi_offset 5, -8
+ 202              		.cfi_offset 14, -4
+ 203 0002 0546     		mov	r5, r0
+  30:Core/Src/soft_user.c ****      unsigned int k = 0;
+ 204              		.loc 1 30 6 is_stmt 1 view .LVU42
+ 205              	.LVL14:
+ 206              		.loc 1 30 19 is_stmt 0 view .LVU43
+ 207 0004 0024     		movs	r4, #0
+ 208              	.LVL15:
+ 209              	.L20:
+  31:Core/Src/soft_user.c ****      do
+ 210              		.loc 1 31 6 is_stmt 1 discriminator 1 view .LVU44
+  32:Core/Src/soft_user.c ****      {
+  33:Core/Src/soft_user.c ****           HAL_UART_Transmit(&huart1, (uint8_t *)(str + k), 1, 1000);
+ 211              		.loc 1 33 11 discriminator 1 view .LVU45
+ 212 0006 4FF47A73 		mov	r3, #1000
+ 213 000a 0122     		movs	r2, #1
+ 214 000c 2919     		adds	r1, r5, r4
+ 215 000e 0448     		ldr	r0, .L22
+ 216 0010 FFF7FEFF 		bl	HAL_UART_Transmit
+ 217              	.LVL16:
+  34:Core/Src/soft_user.c ****           k++;
+ 218              		.loc 1 34 11 discriminator 1 view .LVU46
+ 219              		.loc 1 34 12 is_stmt 0 discriminator 1 view .LVU47
+ 220 0014 0134     		adds	r4, r4, #1
+ 221              	.LVL17:
+  35:Core/Src/soft_user.c ****      } while (*(str + k) != '\0');
+ 222              		.loc 1 35 14 is_stmt 1 discriminator 1 view .LVU48
+ 223              		.loc 1 35 15 is_stmt 0 discriminator 1 view .LVU49
+ 224 0016 2B5D     		ldrb	r3, [r5, r4]	@ zero_extendqisi2
+ 225              		.loc 1 35 6 discriminator 1 view .LVU50
+ 226 0018 002B     		cmp	r3, #0
+ 227 001a F4D1     		bne	.L20
+  36:Core/Src/soft_user.c **** }
+ 228              		.loc 1 36 1 view .LVU51
+ 229 001c 38BD     		pop	{r3, r4, r5, pc}
+ 230              	.LVL18:
+ 231              	.L23:
+ 232              		.loc 1 36 1 view .LVU52
+ 233 001e 00BF     		.align	2
+ 234              	.L22:
+ 235 0020 00000000 		.word	huart1
+ 236              		.cfi_endproc
+ 237              	.LFE147:
+ 239              		.text
+ARM GAS  C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s 			page 6
+
+
+ 240              	.Letext0:
+ 241              		.file 2 "d:\\10 2021.07\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 242              		.file 3 "d:\\10 2021.07\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 243              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7b0xx.h"
+ 244              		.file 5 "d:\\10 2021.07\\lib\\gcc\\arm-none-eabi\\10.3.1\\include\\stddef.h"
+ 245              		.file 6 "d:\\10 2021.07\\arm-none-eabi\\include\\sys\\_types.h"
+ 246              		.file 7 "d:\\10 2021.07\\arm-none-eabi\\include\\sys\\reent.h"
+ 247              		.file 8 "d:\\10 2021.07\\arm-none-eabi\\include\\sys\\lock.h"
+ 248              		.file 9 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 249              		.file 10 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
+ 250              		.file 11 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 251              		.file 12 "d:\\10 2021.07\\arm-none-eabi\\include\\stdio.h"
+ARM GAS  C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 soft_user.c
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:17     .text.delay:00000000 $t
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:25     .text.delay:00000000 delay
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:71     .text.delay:00000018 $d
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:76     .text.delay_us:00000000 $t
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:83     .text.delay_us:00000000 delay_us
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:131    .text.fputc:00000000 $t
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:138    .text.fputc:00000000 fputc
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:176    .text.fputc:0000001c $d
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:181    .text.Usart_SendString:00000000 $t
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:188    .text.Usart_SendString:00000000 Usart_SendString
+C:\Users\20614\AppData\Local\Temp\ccOL9XL9.s:235    .text.Usart_SendString:00000020 $d
+
+UNDEFINED SYMBOLS
+HAL_UART_Transmit
+huart1

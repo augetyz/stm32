@@ -1,0 +1,1 @@
+f40vet6_car_biubiu1\startup_stm32f407xx.o: startup_stm32f407xx.s
