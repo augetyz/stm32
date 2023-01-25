@@ -23,6 +23,7 @@ h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.
 h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h
 h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma_ex.h
 h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h
+h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma2d.h
 h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h
 h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h
 h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h
@@ -39,6 +40,12 @@ h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 h7b0_ltdc_rgb\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
 h7b0_ltdc_rgb\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+h7b0_ltdc_rgb\main.o: ../Core/Inc/ltdc.h
+h7b0_ltdc_rgb\main.o: ../Core/Inc/tim.h
+h7b0_ltdc_rgb\main.o: ../Core/Inc/usart.h
+h7b0_ltdc_rgb\main.o: ../Core/Inc/gpio.h
+h7b0_ltdc_rgb\main.o: ../Core/Inc/soft_user.h
+h7b0_ltdc_rgb\main.o: ../Core/Inc/lcd_LTDC.h
+h7b0_ltdc_rgb\main.o: ../Core/Inc/lcd_fonts.h
 h7b0_ltdc_rgb\main.o: ../Core/Inc/touch_800x480.h
 h7b0_ltdc_rgb\main.o: ../Core/Inc/touch_iic.h
-h7b0_ltdc_rgb\main.o: ../Core/Inc/main.h

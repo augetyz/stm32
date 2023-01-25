@@ -1,4 +1,4 @@
-h7b0_ltdc_dma_rgb\system_stm32h7xx.o: ../Core/Src/system_stm32h7xx.c
+h7b0_ltdc_dma_rgb\system_stm32h7xx.o: ..\Core\Src\system_stm32h7xx.c
 h7b0_ltdc_dma_rgb\system_stm32h7xx.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
 h7b0_ltdc_dma_rgb\system_stm32h7xx.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7b0xx.h
 h7b0_ltdc_dma_rgb\system_stm32h7xx.o: ../Drivers/CMSIS/Include/core_cm7.h

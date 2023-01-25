@@ -433,6 +433,31 @@
               <FileType>1</FileType>
               <FilePath>..\Core\Src\lcd_fonts.c</FilePath>
             </File>
+            <File>
+              <FileName>dma2d.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\dma2d.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ltdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\ltdc.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\usart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

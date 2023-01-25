@@ -22,6 +22,7 @@ h7b0_ltdc_rgb\stm32h7xx_hal_rcc.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx
 h7b0_ltdc_rgb\stm32h7xx_hal_rcc.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h
 h7b0_ltdc_rgb\stm32h7xx_hal_rcc.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma_ex.h
 h7b0_ltdc_rgb\stm32h7xx_hal_rcc.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h
+h7b0_ltdc_rgb\stm32h7xx_hal_rcc.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma2d.h
 h7b0_ltdc_rgb\stm32h7xx_hal_rcc.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h
 h7b0_ltdc_rgb\stm32h7xx_hal_rcc.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h
 h7b0_ltdc_rgb\stm32h7xx_hal_rcc.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h

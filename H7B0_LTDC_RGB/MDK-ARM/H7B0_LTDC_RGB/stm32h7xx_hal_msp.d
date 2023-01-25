@@ -23,6 +23,7 @@ h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx
 h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h
 h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma_ex.h
 h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h
+h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma2d.h
 h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h
 h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h
 h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h
@@ -39,6 +40,3 @@ h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx
 h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
 h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
-h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Core/Inc/touch_800x480.h
-h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Core/Inc/touch_iic.h
-h7b0_ltdc_rgb\stm32h7xx_hal_msp.o: ../Core/Inc/main.h

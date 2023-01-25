@@ -46,3 +46,8 @@ h7b0_ltdc_dma_rgb\main.o: ../Core/Inc/main.h
 h7b0_ltdc_dma_rgb\main.o: ../Core/Inc/soft_user.h
 h7b0_ltdc_dma_rgb\main.o: ../Core/Inc/lcd_LTDC.h
 h7b0_ltdc_dma_rgb\main.o: ../Core/Inc/lcd_fonts.h
+h7b0_ltdc_dma_rgb\main.o: ../Core/Inc/dma2d.h
+h7b0_ltdc_dma_rgb\main.o: ../Core/Inc/ltdc.h
+h7b0_ltdc_dma_rgb\main.o: ../Core/Inc/tim.h
+h7b0_ltdc_dma_rgb\main.o: ../Core/Inc/usart.h
+h7b0_ltdc_dma_rgb\main.o: ../Core/Inc/gpio.h
