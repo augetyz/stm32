@@ -1,0 +1,11 @@
+h7b0_lvgl_qspi_extend\lv_ll.o: ..\lvgl\src\misc\lv_ll.c
+h7b0_lvgl_qspi_extend\lv_ll.o: ..\lvgl\src\misc\lv_ll.h
+h7b0_lvgl_qspi_extend\lv_ll.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+h7b0_lvgl_qspi_extend\lv_ll.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h7b0_lvgl_qspi_extend\lv_ll.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+h7b0_lvgl_qspi_extend\lv_ll.o: ..\lvgl\src\misc\lv_mem.h
+h7b0_lvgl_qspi_extend\lv_ll.o: ..\lvgl\src\misc\../lv_conf_internal.h
+h7b0_lvgl_qspi_extend\lv_ll.o: ..\lvgl\src\misc\../lv_conf_kconfig.h
+h7b0_lvgl_qspi_extend\lv_ll.o: ..\lvgl\lv_conf.h
+h7b0_lvgl_qspi_extend\lv_ll.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
+h7b0_lvgl_qspi_extend\lv_ll.o: ..\lvgl\src\misc\lv_types.h

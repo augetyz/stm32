@@ -1,0 +1,10 @@
+h7b0_lvgl_qspi_extend\lv_printf.o: ..\lvgl\src\misc\lv_printf.c
+h7b0_lvgl_qspi_extend\lv_printf.o: ..\lvgl\src\misc\lv_printf.h
+h7b0_lvgl_qspi_extend\lv_printf.o: ..\lvgl\src\misc\../lv_conf_internal.h
+h7b0_lvgl_qspi_extend\lv_printf.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+h7b0_lvgl_qspi_extend\lv_printf.o: ..\lvgl\src\misc\../lv_conf_kconfig.h
+h7b0_lvgl_qspi_extend\lv_printf.o: ..\lvgl\lv_conf.h
+h7b0_lvgl_qspi_extend\lv_printf.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+h7b0_lvgl_qspi_extend\lv_printf.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h7b0_lvgl_qspi_extend\lv_printf.o: ..\lvgl\src\misc\lv_types.h
+h7b0_lvgl_qspi_extend\lv_printf.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
