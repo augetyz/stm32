@@ -27,7 +27,42 @@ Project File Date:  01/25/2023
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'H7B0_lvgl'
-"H7B0_lvgl_QSPI_extend\H7B0_lvgl.axf" - 0 Error(s), 0 Warning(s).
+assembling startup_stm32h7b0xx.s...
+compiling soft_user.c...
+compiling lcd_LTDC.c...
+compiling touch_800x480.c...
+compiling stm32h7xx_hal_msp.c...
+compiling stm32h7xx_it.c...
+compiling lv_port_indev.c...
+..\lvgl\porting\lv_port_indev.c(210): warning:  #177-D: function "touchpad_is_pressed"  was declared but never referenced
+  static bool touchpad_is_pressed(void)
+..\lvgl\porting\lv_port_indev.c(218): warning:  #177-D: function "touchpad_get_xy"  was declared but never referenced
+  static void touchpad_get_xy(lv_coord_t * x, lv_coord_t * y)
+..\lvgl\porting\lv_port_indev.c(231): warning:  #177-D: function "mouse_init"  was declared but never referenced
+  static void mouse_init(void)
+..\lvgl\porting\lv_port_indev.c(237): warning:  #177-D: function "mouse_read"  was declared but never referenced
+  static void mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\porting\lv_port_indev.c(273): warning:  #177-D: function "keypad_init"  was declared but never referenced
+  static void keypad_init(void)
+..\lvgl\porting\lv_port_indev.c(279): warning:  #177-D: function "keypad_read"  was declared but never referenced
+  static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\porting\lv_port_indev.c(332): warning:  #177-D: function "encoder_init"  was declared but never referenced
+  static void encoder_init(void)
+..\lvgl\porting\lv_port_indev.c(338): warning:  #177-D: function "encoder_read"  was declared but never referenced
+  static void encoder_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\porting\lv_port_indev.c(346): warning:  #177-D: function "encoder_handler"  was declared but never referenced
+  static void encoder_handler(void)
+..\lvgl\porting\lv_port_indev.c(359): warning:  #177-D: function "button_init"  was declared but never referenced
+  static void button_init(void)
+..\lvgl\porting\lv_port_indev.c(365): warning:  #177-D: function "button_read"  was declared but never referenced
+  static void button_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\porting\lv_port_indev.c: 11 warnings, 0 errors
+compiling lv_port_disp.c...
+compiling main.c...
+linking...
+Program Size: Code=165978 RO-data=18870 RW-data=588 ZI-data=55452  
+FromELF: creating hex file...
+"H7B0_lvgl_QSPI_extend\H7B0_lvgl.axf" - 0 Error(s), 11 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +86,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.4.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:26
 </pre>
 </body>
 </html>

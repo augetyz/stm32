@@ -95,7 +95,7 @@ void lv_port_disp_init(void)
                     
   // 因为7B0片内只有1M SRAM，前面 800*480*2 = 768000 字节需要划分为显存，剩下的不到300K作为缓冲
       static lv_color_t *buf_2_1 = (lv_color_t * )(0x240BB800);                   
-	static lv_color_t *buf_2_2 = (lv_color_t * )(0x240DCB40);    
+	  static lv_color_t *buf_2_2 = (lv_color_t * )(0x240DCB40);    
 
 	lv_disp_draw_buf_init(&draw_buf_dsc_2, buf_2_1, buf_2_2, MY_DISP_HOR_RES * 85);   /*Initialize the display buffer*/
 
