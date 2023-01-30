@@ -27,7 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "soft_user.h"
-#include "string.h"
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,7 +54,7 @@ char task_test_text[]="简单的测试任务";
 /* USER CODE BEGIN PM */
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
-uint8_t debug_date[200]={0};
+uint8_t debug_date[400]={0};
 
 
 
@@ -133,19 +133,19 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of myTask_key */
-  osThreadDef(myTask_key, key_Task, osPriorityAboveNormal, 0, 128);
+  osThreadDef(myTask_key, key_Task, osPriorityAboveNormal, 0, 512);
   myTask_keyHandle = osThreadCreate(osThread(myTask_key), NULL);
 
   /* definition and creation of myTask_led */
-  osThreadDef(myTask_led, led_Task, osPriorityIdle, 0, 128);
+  osThreadDef(myTask_led, led_Task, osPriorityIdle, 0, 512);
   myTask_ledHandle = osThreadCreate(osThread(myTask_led), NULL);
 
   /* definition and creation of myTask_IMU */
-  osThreadDef(myTask_IMU, IMU_Task, osPriorityAboveNormal, 0, 128);
+  osThreadDef(myTask_IMU, IMU_Task, osPriorityAboveNormal, 0, 512);
   myTask_IMUHandle = osThreadCreate(osThread(myTask_IMU), NULL);
 
   /* definition and creation of myTask_debug */
-  osThreadDef(myTask_debug, deubg_Task, osPriorityLow, 0, 128);
+  osThreadDef(myTask_debug, deubg_Task, osPriorityLow, 0, 512);
   myTask_debugHandle = osThreadCreate(osThread(myTask_debug), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -186,6 +186,7 @@ void key_Task(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+      
     osDelay(1);
   }
   /* USER CODE END key_Task */
@@ -212,9 +213,7 @@ void led_Task(void const * argument)
               while((GPIOA->IDR&(1<<15))==0);
               /*do something*/
               printf("按键触发\n");
-              
-              
-              
+   
           }     
       }
     osDelay(1);
@@ -235,6 +234,7 @@ void IMU_Task(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+      
     osDelay(1);
   }
   /* USER CODE END IMU_Task */
@@ -274,7 +274,8 @@ void deubg_Task(void const * argument)
                                 car_status.ditance_x,car_status.ditance_y,car_status.IMU[0],car_status.IMU[1],car_status.IMU[2],\
                                 car_status.Car_speed[0],car_status.Car_speed[1],car_status.Car_speed[2],car_status.Car_speed[3],task_description);
       
-      HAL_UART_Transmit_DMA(&huart1,debug_date,200);
+      
+      HAL_UART_Transmit_DMA(&huart1,debug_date,400);
       osDelay(1000);
   }
   /* USER CODE END deubg_Task */

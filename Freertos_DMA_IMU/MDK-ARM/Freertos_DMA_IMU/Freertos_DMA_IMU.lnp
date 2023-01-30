@@ -9,6 +9,7 @@
 "freertos_dma_imu\stm32f4xx_it.o"
 "freertos_dma_imu\stm32f4xx_hal_msp.o"
 "freertos_dma_imu\stm32f4xx_hal_timebase_tim.o"
+"freertos_dma_imu\printf-stdarg.o"
 "freertos_dma_imu\stm32f4xx_hal_rcc.o"
 "freertos_dma_imu\stm32f4xx_hal_rcc_ex.o"
 "freertos_dma_imu\stm32f4xx_hal_flash.o"
