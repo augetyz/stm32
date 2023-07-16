@@ -1,0 +1,282 @@
+Dependencies for Project 'template', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 5060750::V5.06 update 6 (build 750)::.\ARMCC
+F (.\main.c)(0x625AF9DB)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+I (..\HARDWARE\IIC_OLED\iic_oled.h)(0x606D1544)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+I (..\HARDWARE\IIC GPIO\iic_gpio.h)(0x62599224)
+I (D:\keil5\ARM\ARMCC\include\inttypes.h)(0x5E53505C)
+I (..\DELAY\delay.h)(0x625AE248)
+I (..\HARDWARE\LED\led.h)(0x5E4D36F2)
+I (..\HARDWARE\SDIO\sdio_sdcard.h)(0x5CD1753E)
+I (..\FATFS\pff.h)(0x5358FAE2)
+I (..\FATFS\integer.h)(0x4BD31212)
+I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x5E53505C)
+I (D:\keil5\ARM\ARMCC\include\string.h)(0x5E53505C)
+I (..\HARDWARE\usart\usart.h)(0x625AF522)
+F (.\stm32f10x_it.c)(0x4D99A59E)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_it.o --omf_browse ..\obj\stm32f10x_it.crf --depend ..\obj\stm32f10x_it.d)
+I (stm32f10x_it.h)(0x4D99A59E)
+I (stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (system_stm32f10x.h)(0x4D783CAA)
+I (stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (.\system_stm32f10x.c)(0x4D99A59E)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\system_stm32f10x.o --omf_browse ..\obj\system_stm32f10x.crf --depend ..\obj\system_stm32f10x.d)
+I (stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (system_stm32f10x.h)(0x4D783CAA)
+I (stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\FWLIB\src\misc.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\misc.o --omf_browse ..\obj\misc.crf --depend ..\obj\misc.d)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+F (..\FWLIB\src\stm32f10x_gpio.c)(0x4D79EEC6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_gpio.o --omf_browse ..\obj\stm32f10x_gpio.crf --depend ..\obj\stm32f10x_gpio.d)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\FWLIB\src\stm32f10x_rcc.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_rcc.o --omf_browse ..\obj\stm32f10x_rcc.crf --depend ..\obj\stm32f10x_rcc.d)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\FWLIB\src\stm32f10x_usart.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_usart.o --omf_browse ..\obj\stm32f10x_usart.crf --depend ..\obj\stm32f10x_usart.d)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\FWLIB\src\stm32f10x_spi.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_spi.o --omf_browse ..\obj\stm32f10x_spi.crf --depend ..\obj\stm32f10x_spi.d)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\FWLIB\src\stm32f10x_sdio.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_sdio.o --omf_browse ..\obj\stm32f10x_sdio.crf --depend ..\obj\stm32f10x_sdio.d)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\FWLIB\src\stm32f10x_dma.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_dma.o --omf_browse ..\obj\stm32f10x_dma.crf --depend ..\obj\stm32f10x_dma.d)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\CORE\core_cm3.c)(0x4C0C587E)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\core_cm3.o --omf_browse ..\obj\core_cm3.crf --depend ..\obj\core_cm3.d)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+F (..\CORE\startup_stm32f10x_hd.s)(0x4D783CDE)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 530" --pd "STM32F10X_HD SETA 1" --pd "_RTE_ SETA 1"--list .\startup_stm32f10x_hd.lst --xref -o ..\obj\startup_stm32f10x_hd.o --depend ..\obj\startup_stm32f10x_hd.d)
+F (..\DELAY\delay.c)(0x560257AE)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\delay.o --omf_browse ..\obj\delay.crf --depend ..\obj\delay.d)
+I (..\DELAY\delay.h)(0x625AE248)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\HARDWARE\IIC_OLED\iic_oled.c)(0x625A2B63)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\iic_oled.o --omf_browse ..\obj\iic_oled.crf --depend ..\obj\iic_oled.d)
+I (..\HARDWARE\IIC_OLED\iic_oled.h)(0x606D1544)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+I (..\HARDWARE\IIC GPIO\iic_gpio.h)(0x62599224)
+I (D:\keil5\ARM\ARMCC\include\inttypes.h)(0x5E53505C)
+I (..\DELAY\delay.h)(0x625AE248)
+I (..\HARDWARE\IIC_OLED\codetab.h)(0x6259A179)
+F (..\HARDWARE\IIC GPIO\iic_gpio.c)(0x606D106C)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\iic_gpio.o --omf_browse ..\obj\iic_gpio.crf --depend ..\obj\iic_gpio.d)
+I (..\HARDWARE\IIC GPIO\iic_gpio.h)(0x62599224)
+I (D:\keil5\ARM\ARMCC\include\inttypes.h)(0x5E53505C)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\HARDWARE\KEY\key.c)(0x5E4D34CA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\key.o --omf_browse ..\obj\key.crf --depend ..\obj\key.d)
+I (..\HARDWARE\KEY\key.h)(0x5E4D34CA)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+F (..\HARDWARE\xpt2046\xpt2046.c)(0x5DF451B0)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\xpt2046.o --omf_browse ..\obj\xpt2046.crf --depend ..\obj\xpt2046.d)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+I (D:\keil5\ARM\ARMCC\include\math.h)(0x5E53505A)
+I (..\HARDWARE\xpt2046\xpt2046.h)(0x5BAD970E)
+I (..\DELAY\delay.h)(0x625AE248)
+I (..\HARDWARE\SPI\spi.h)(0x514FD370)
+I (..\GUI\gui.h)(0x56026118)
+I (..\TFT\tft.h)(0x5BBB1858)
+F (..\HARDWARE\SDIO\sdio_sdcard.c)(0x5CD1754C)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\sdio_sdcard.o --omf_browse ..\obj\sdio_sdcard.crf --depend ..\obj\sdio_sdcard.d)
+I (..\HARDWARE\SDIO\sdio_sdcard.h)(0x5CD1753E)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+I (D:\keil5\ARM\ARMCC\include\string.h)(0x5E53505C)
+F (..\FATFS\diskio.c)(0x5E512DE6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\diskio.o --omf_browse ..\obj\diskio.crf --depend ..\obj\diskio.d)
+I (..\FATFS\diskio.h)(0x4B1FA9E6)
+I (..\FATFS\integer.h)(0x4BD31212)
+I (..\USER\stm32f10x.h)(0x5E512D88)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x5E53505C)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5E512D88)
+I (..\FWLIB\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\FWLIB\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\inc\misc.h)(0x4D783BB4)
+I (..\HARDWARE\SPI\spi.h)(0x514FD370)
+I (..\HARDWARE\SDIO\sdio_sdcard.h)(0x5CD1753E)
+F (..\FATFS\pff.c)(0x4CFE2F02)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\USER -I ..\FWLIB\inc -I ..\CORE -I ..\DELAY -I ..\HARDWARE\LED -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\KEY -I ..\TFT -I ..\GUI -I ..\HARDWARE\xpt2046 -I ..\FATFS -I ..\HARDWARE\SDIO -I "..\HARDWARE\IIC GPIO" -I ..\HARDWARE\IIC_OLED -I ..\HARDWARE\usart-I.\RTE\_Target_1-ID:\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-ID:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_HD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\pff.o --omf_browse ..\obj\pff.crf --depend ..\obj\pff.d)
+I (..\FATFS\pff.h)(0x5358FAE2)
+I (..\FATFS\integer.h)(0x4BD31212)
+I (..\FATFS\diskio.h)(0x4B1FA9E6)
