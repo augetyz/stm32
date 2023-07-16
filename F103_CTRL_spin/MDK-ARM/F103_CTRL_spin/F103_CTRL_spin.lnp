@@ -1,0 +1,26 @@
+--cpu Cortex-M3
+"f103_ctrl_spin\startup_stm32f103xb.o"
+"f103_ctrl_spin\main.o"
+"f103_ctrl_spin\gpio.o"
+"f103_ctrl_spin\usart.o"
+"f103_ctrl_spin\stm32f1xx_it.o"
+"f103_ctrl_spin\stm32f1xx_hal_msp.o"
+"f103_ctrl_spin\stm32f1xx_hal_gpio_ex.o"
+"f103_ctrl_spin\stm32f1xx_hal_tim.o"
+"f103_ctrl_spin\stm32f1xx_hal_tim_ex.o"
+"f103_ctrl_spin\stm32f1xx_hal_uart.o"
+"f103_ctrl_spin\stm32f1xx_hal.o"
+"f103_ctrl_spin\stm32f1xx_hal_rcc.o"
+"f103_ctrl_spin\stm32f1xx_hal_rcc_ex.o"
+"f103_ctrl_spin\stm32f1xx_hal_gpio.o"
+"f103_ctrl_spin\stm32f1xx_hal_dma.o"
+"f103_ctrl_spin\stm32f1xx_hal_cortex.o"
+"f103_ctrl_spin\stm32f1xx_hal_pwr.o"
+"f103_ctrl_spin\stm32f1xx_hal_flash.o"
+"f103_ctrl_spin\stm32f1xx_hal_flash_ex.o"
+"f103_ctrl_spin\stm32f1xx_hal_exti.o"
+"f103_ctrl_spin\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "F103_CTRL_spin\F103_CTRL_spin.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "F103_CTRL_spin.map" -o F103_CTRL_spin\F103_CTRL_spin.axf

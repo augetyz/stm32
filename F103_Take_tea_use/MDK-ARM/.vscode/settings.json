@@ -1,0 +1,7 @@
+{
+     "files.associations": {
+          "doing.h": "c",
+          "cstdlib": "c",
+          "soft_use.h": "c"
+     }
+}
