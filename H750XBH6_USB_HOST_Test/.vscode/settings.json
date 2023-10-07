@@ -1,0 +1,7 @@
+{
+     "cmake.sourceDirectory": "E:/HAL_example/H750XBH6_USB_HOST_Test/MDK-ARM",
+     "files.associations": {
+          "main.h": "c",
+          "stm32h7xx_hal.h": "c"
+     }
+}

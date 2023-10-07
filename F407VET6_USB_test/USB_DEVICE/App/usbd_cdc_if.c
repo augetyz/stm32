@@ -271,22 +271,22 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 
   /* 保存接收到的数据 */
   Rx_date_save(Buf,UserRxBuffer,*Len);
-  /* 如果接收到的数据量小于或等于缓冲区大小，增加接收数据的数量 */
+  /* 如果接收到的数据量小于或等于缓冲区大小，增加接收数据的数�? */
   if(Rx_Date_Num<=APP_RX_DATA_SIZE)
       Rx_Date_Num+=*Len;
-  /* 如果接收到的数据量大于缓冲区大小，将接收数据的数量设置为缓冲区大小 */
+  /* 如果接收到的数据量大于缓冲区大小，将接收数据的数量设置为缓冲区大�? */
   else
       Rx_Date_Num=APP_RX_DATA_SIZE;
 
-  /* 如果接收状态为0 */
+  /* 如果接收状�?�为0 */
   if(Rx_status==0)
   {
-    /* 如果接收到的数据量大于或等于目标数据量 */
+    /* 如果接收到的数据量大于或等于目标数据�? */
     if(Rx_Date_Num>=RX_goal_num)
     {
-      /* 将用户接收缓冲区的数据复制到p指向的位置 */
+      /* 将用户接收缓冲区的数据复制到p指向的位�? */
       Rx_buffer_copy(p,UserRxBuffer,RX_goal_num);
-      /* 减少接收数据的数量 */
+      /* 减少接收数据的数�? */
         Rx_Date_Num-=RX_goal_num;
       /* 将接收状态设置为1 */
       Rx_status=1;
@@ -294,7 +294,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
   }
   /* 设置USB设备的接收缓冲区 */
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
-  /* 接收USB数据包 */
+  /* 接收USB数据�? */
   USBD_CDC_ReceivePacket(&hUsbDeviceFS);
   /* 返回操作结果 */
   return (USBD_OK);

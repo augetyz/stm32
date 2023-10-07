@@ -90,8 +90,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   //地址＋0xFD ＋方向和速度（2字节）＋加速度＋脉冲数（3字节)＋校验字节
   uint32_t i=0;
-  uint8_t date[]={0X01,0XFD,0X10,0X01,0XFF,0X00,0X04,0X2A,0X6B};
-  uint8_t date2[]={0X01,0XFD,0X10,0X01,0XFF,0X00,0X04,0X2C,0X6B};
+  uint8_t date[]={0X01,0XFD,0X10,0X04,0XFF,0X00,0X04,0X2A,0X6B};
+  uint8_t date2[]={0X01,0XFD,0X10,0X04,0XFF,0X00,0X04,0X2C,0X6B};
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -105,17 +105,17 @@ int main(void)
       if(i==40)
       {
           HAL_UART_Transmit(&huart1,date,9,100);
-          HAL_Delay(8000);
+          HAL_Delay(2000);
       }
       if(i==80)
       {
           HAL_UART_Transmit(&huart1,date,9,100);
-          HAL_Delay(8000);
+          HAL_Delay(2000);
       }
       if(i==120)
       {
           HAL_UART_Transmit(&huart1,date2,9,100);
-          HAL_Delay(8000);
+          HAL_Delay(2000);
           i=0;
       }
     /* USER CODE END WHILE */

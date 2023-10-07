@@ -46,7 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint32_t time=0;
+
 extern uint8_t Rx_status;
 
 /* USER CODE END PV */
@@ -70,6 +70,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
     uint8_t Rx_Buffer[32];
+    uint8_t Tx_Buffer[32]="ÁéåÛÀÏÁù\n";
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -92,7 +93,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-    time=100;
+    usb_vbc_Receive_It(Rx_Buffer,16);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -111,14 +112,11 @@ int main(void)
 //          CDC_Transmit_FS((uint8_t*)Rx_Buffer, 16);
       if(Rx_status==1)
       {
-          usb_printf("ÊÕµ½À²\n");
-          HAL_Delay(10);
           CDC_Transmit_FS(Rx_Buffer, 16);
-
           usb_vbc_Receive_It(Rx_Buffer,16);
       }
-      
-      HAL_Delay(time);
+//      CDC_Transmit_FS(Tx_Buffer,strlen((char*)Tx_Buffer));
+      HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
@@ -173,7 +171,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   {
       if((GPIOA->IDR&GPIO_Pin)==1)
       {
-          time=1100-time;
+
       }
   }
 }

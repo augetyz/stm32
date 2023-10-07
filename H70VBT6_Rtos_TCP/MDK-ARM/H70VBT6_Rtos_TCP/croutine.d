@@ -1,0 +1,14 @@
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/croutine.c
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+h70vbt6_rtos_tcp\croutine.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
+h70vbt6_rtos_tcp\croutine.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+h70vbt6_rtos_tcp\croutine.o: ../Core/Inc/FreeRTOSConfig.h
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/croutine.h
+h70vbt6_rtos_tcp\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h

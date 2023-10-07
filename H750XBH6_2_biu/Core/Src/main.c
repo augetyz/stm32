@@ -110,8 +110,8 @@ int main(void)
   HAL_Delay(10);
     
 
-  show_sdcard_info(hsd1);
-    SD_Test();
+//  show_sdcard_info(hsd1);
+//    SD_Test();
   /* USER CODE END 2 */
 
   /* Infinite loop */

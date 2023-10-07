@@ -2,6 +2,11 @@
 #include "usb_user.h"
 #include <stdarg.h>
 #include "main.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "main.h"
+#include "cmsis_os.h"
+
 /*
 *** 移植注意usbd_cdc_if.c文件中修改的内容，包括
 *** 头文件包含
@@ -65,19 +70,43 @@ uint8_t usb_vbc_Receive(uint8_t* Rx_Buffer,uint16_t num,uint32_t overtime)
     }
     else
     {
-        while(1)
+        if(overtime==HAL_MAX_DELAY)
         {
-            if(Rx_Date_Num>=num)
+            while(1)
             {
-                Rx_buffer_copy(Rx_Buffer,UserRxBuffer,num);
-                Rx_Date_Num-=num;
-                return 1;
+                if(Rx_Date_Num>=num)
+                {
+                    Rx_buffer_copy(Rx_Buffer,UserRxBuffer,num);
+                    Rx_Date_Num-=num;
+                    return 1;
+                }
+#ifdef INC_FREERTOS_H               
+                osDelay(1);    
+#else
+                HAL_Delay(1);
+#endif
             }
-            else
-                time++;
-            if(time>overtime)
-                return 0;
-            HAL_Delay(1);
+        }
+        else
+        {
+            while(1)
+            {
+                if(Rx_Date_Num>=num)
+                {
+                    Rx_buffer_copy(Rx_Buffer,UserRxBuffer,num);
+                    Rx_Date_Num-=num;
+                    return 1;
+                }
+                else
+                    time++;
+                if(time>overtime)
+                    return 0;
+#ifdef INC_FREERTOS_H               
+                osDelay(1);    
+#else
+                HAL_Delay(1);
+#endif          
+            }
         }
     }
 }
